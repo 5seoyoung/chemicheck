@@ -1,0 +1,634 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		042C47164E54F060611ABA26 /* ChemicalChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820A4E96B7F9D87BBF0CFF0 /* ChemicalChip.swift */; };
+		0B18FFB323E34C7788C571EC /* ChatAgentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C365A41A633B2300D3AB050 /* ChatAgentViewModel.swift */; };
+		0D0A80DF6734990EDACC3EEA /* FoodDrugAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE42E621D885B85F6EBFC02 /* FoodDrugAPIService.swift */; };
+		15EAD0C96AF3BE8BB5D48FE7 /* DiagnosisResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D066FDC2C67450975F95091E /* DiagnosisResultView.swift */; };
+		1916511FC9A479D08AD3602D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E13FB28FB9F5284601DAAB4 /* Assets.xcassets */; };
+		1A60C3605A7C69739677D956 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55411CF2D1464739B55B1179 /* Color+Extension.swift */; };
+		1B70023C05E98337E0EF96B9 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB4C9DE6B4BF2487BD38AFC /* ChatMessage.swift */; };
+		2359CF42BE537544794A2478 /* DummyDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2877B3BA8F0980AE3E3F48EE /* DummyDataLoader.swift */; };
+		296E75FFF66AB5942B33E26A /* alternatives.json in Resources */ = {isa = PBXBuildFile; fileRef = FD0A6AC714D64CC42E20537F /* alternatives.json */; };
+		2AFF3CE81069DD053AF10169 /* NotificationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA194BB530DE665990453F8E /* NotificationDetailView.swift */; };
+		2D6A6CA152662E1994D9ED99 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F372B85495A6E3D17ACEC8AA /* NotificationService.swift */; };
+		310845AF2644F70BD69888AF /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = 424F0733C88A59A5A8C088C9 /* products.json */; };
+		563CA78FFCD4FE9FE15E9250 /* RiskBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2386041123ACDADD5E31EE40 /* RiskBadge.swift */; };
+		5B10184EC4F8048A0628A913 /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411C5D213606E031DC3D637 /* ProductCard.swift */; };
+		5B36D9C8EF69A394B36280EB /* RiskCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D406A61CFE75CD9EF5611A7 /* RiskCalculator.swift */; };
+		5BC48126D4120AEB2145A149 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2380B7806F475E85175CD083 /* ContentView.swift */; };
+		611E49E904937781EBD5F656 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05510DE0CBAABD81F056506B /* AppState.swift */; };
+		62D0DD9FC2D8D19F3BD89DD1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8C307C65E184B5BD6919DA /* OnboardingView.swift */; };
+		6E69798B5845F2C7CE73EA7C /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF0501D66D34F730963028 /* OCRService.swift */; };
+		6EB617A4D9AB527B7E34F5FB /* MyProductsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D17724F1279DEAE6E0EC5B42 /* MyProductsViewModel.swift */; };
+		79F7D363C8C5DA7F10F9985B /* MyProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FD55572CA47D4D3E045B030 /* MyProductsView.swift */; };
+		813735C14781AEBF40CB530A /* Vision.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CA3CBB0E572D0B1139BEB98D /* Vision.framework */; };
+		831CE5B976023B4DCE31C529 /* RiskLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8DB6F95CFD0A31A61D4CB8 /* RiskLevel.swift */; };
+		84D8A232DD0E016D99AF5646 /* DiagnosisViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874F522E09791537D6B0F853 /* DiagnosisViewModel.swift */; };
+		85E7ED66ED144C8008102CBD /* AirKoreaAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1EB85EA70E55588F59193F /* AirKoreaAPIService.swift */; };
+		86265AC843F665093A3C41B2 /* FamilyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F21C42955811F4C0A42CB6 /* FamilyProfile.swift */; };
+		8AA330C7705F84C7E31A3415 /* AIAgentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FCD21BF5BA5312E808FA00 /* AIAgentService.swift */; };
+		902E82D2468BB9442A043987 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291DEC959BC5CDDFA78B4AFD /* UserNotifications.framework */; };
+		93D385C4DA037BCA06906559 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99269169B9AEEB5A9C4122 /* CoreLocation.framework */; };
+		952BBE588A16901E76F71A5B /* Chemical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279B692FD60DF389EF8B81A1 /* Chemical.swift */; };
+		99E3AD74F367F292315242B9 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE64F110B071515555603942 /* CameraView.swift */; };
+		AB1F7F08DFAF8940988ABE2A /* KEITIAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB79BEAE5E2FCB063550E0F4 /* KEITIAPIService.swift */; };
+		BA287B005F9358D3F9F45FD4 /* AlternativeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B507EA880AA4B436B5B7B07 /* AlternativeDetailView.swift */; };
+		BF0F7653C7DA61AE046CE666 /* ChatAgentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C602BFB7D8BF56EF2DE609E4 /* ChatAgentView.swift */; };
+		C0630494850F97ACE568CF92 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDEE2EE832D9049B11DEBA3 /* AVFoundation.framework */; };
+		C11158C6C843F15C90FFDD25 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BB7703DE7244F982E90B44 /* SplashView.swift */; };
+		D3D017C23164AD63DBBF21B6 /* ChemiCheckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC1A577765340D300F3304 /* ChemiCheckApp.swift */; };
+		E2D4AB4B1B5EF6BABDE94552 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F849FC07E87E4B724EBD1EA /* HomeView.swift */; };
+		E4F76765138245E69A9BEB7F /* Alternative.swift in Sources */ = {isa = PBXBuildFile; fileRef = 296AB8B3B30EA6703AA16B01 /* Alternative.swift */; };
+		EBE99719130399BA948AEBC5 /* MyPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DF727FFB7AC210FE4A8E48 /* MyPageView.swift */; };
+		EDDBA06E337FC557779C6A85 /* chemicals.json in Resources */ = {isa = PBXBuildFile; fileRef = B5191F82D1E17E1AA8E0F713 /* chemicals.json */; };
+		EF7177DA13AB473DB9D8A2A5 /* ProfileEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F298ADE4C540BD93F119E7B8 /* ProfileEditView.swift */; };
+		F44B1E5D169F96CC9A29522A /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = F66DEB1EE73144D0DAF586B6 /* Product.swift */; };
+		FA75555A5DA758236C1EBEB3 /* AlternativeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E78F099E56C0C3DCB90737F /* AlternativeCard.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		05510DE0CBAABD81F056506B /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		1411C5D213606E031DC3D637 /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
+		15BB7703DE7244F982E90B44 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		1820A4E96B7F9D87BBF0CFF0 /* ChemicalChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalChip.swift; sourceTree = "<group>"; };
+		1B507EA880AA4B436B5B7B07 /* AlternativeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeDetailView.swift; sourceTree = "<group>"; };
+		20DF727FFB7AC210FE4A8E48 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
+		2380B7806F475E85175CD083 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2386041123ACDADD5E31EE40 /* RiskBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskBadge.swift; sourceTree = "<group>"; };
+		279B692FD60DF389EF8B81A1 /* Chemical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chemical.swift; sourceTree = "<group>"; };
+		2877B3BA8F0980AE3E3F48EE /* DummyDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataLoader.swift; sourceTree = "<group>"; };
+		291DEC959BC5CDDFA78B4AFD /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		296AB8B3B30EA6703AA16B01 /* Alternative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alternative.swift; sourceTree = "<group>"; };
+		2EE42E621D885B85F6EBFC02 /* FoodDrugAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDrugAPIService.swift; sourceTree = "<group>"; };
+		2FD55572CA47D4D3E045B030 /* MyProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductsView.swift; sourceTree = "<group>"; };
+		424F0733C88A59A5A8C088C9 /* products.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
+		4C1EB85EA70E55588F59193F /* AirKoreaAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirKoreaAPIService.swift; sourceTree = "<group>"; };
+		4C365A41A633B2300D3AB050 /* ChatAgentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAgentViewModel.swift; sourceTree = "<group>"; };
+		4E78F099E56C0C3DCB90737F /* AlternativeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeCard.swift; sourceTree = "<group>"; };
+		55411CF2D1464739B55B1179 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
+		5ADC1A577765340D300F3304 /* ChemiCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemiCheckApp.swift; sourceTree = "<group>"; };
+		5D406A61CFE75CD9EF5611A7 /* RiskCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskCalculator.swift; sourceTree = "<group>"; };
+		5EDEE2EE832D9049B11DEBA3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		6F849FC07E87E4B724EBD1EA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
+		84F21C42955811F4C0A42CB6 /* FamilyProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyProfile.swift; sourceTree = "<group>"; };
+		874F522E09791537D6B0F853 /* DiagnosisViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisViewModel.swift; sourceTree = "<group>"; };
+		8F8C307C65E184B5BD6919DA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		94DF0501D66D34F730963028 /* OCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRService.swift; sourceTree = "<group>"; };
+		9E13FB28FB9F5284601DAAB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B5191F82D1E17E1AA8E0F713 /* chemicals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = chemicals.json; sourceTree = "<group>"; };
+		B9FCD21BF5BA5312E808FA00 /* AIAgentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAgentService.swift; sourceTree = "<group>"; };
+		BCB4C9DE6B4BF2487BD38AFC /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
+		C602BFB7D8BF56EF2DE609E4 /* ChatAgentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAgentView.swift; sourceTree = "<group>"; };
+		CA3CBB0E572D0B1139BEB98D /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
+		D066FDC2C67450975F95091E /* DiagnosisResultView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiagnosisResultView.swift; sourceTree = "<group>"; };
+		D17724F1279DEAE6E0EC5B42 /* MyProductsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductsViewModel.swift; sourceTree = "<group>"; };
+		DA194BB530DE665990453F8E /* NotificationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailView.swift; sourceTree = "<group>"; };
+		DB79BEAE5E2FCB063550E0F4 /* KEITIAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KEITIAPIService.swift; sourceTree = "<group>"; };
+		DB99269169B9AEEB5A9C4122 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		EE64F110B071515555603942 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		F298ADE4C540BD93F119E7B8 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
+		F2FFC43A81C5FCAFFF152E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		F372B85495A6E3D17ACEC8AA /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		F638EC66C9B07AD26373DD5F /* ChemiCheck.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChemiCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F66DEB1EE73144D0DAF586B6 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
+		FA8DB6F95CFD0A31A61D4CB8 /* RiskLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskLevel.swift; sourceTree = "<group>"; };
+		FD0A6AC714D64CC42E20537F /* alternatives.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = alternatives.json; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0A8BF472711A308192A8C267 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C0630494850F97ACE568CF92 /* AVFoundation.framework in Frameworks */,
+				813735C14781AEBF40CB530A /* Vision.framework in Frameworks */,
+				902E82D2468BB9442A043987 /* UserNotifications.framework in Frameworks */,
+				93D385C4DA037BCA06906559 /* CoreLocation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		046B33B2895E15ACD903574F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2380B7806F475E85175CD083 /* ContentView.swift */,
+				789B8FBB2FF36A305CAEEB04 /* Camera */,
+				05C60D8AE48224AE82381E00 /* ChatAgent */,
+				4FD0C91E56245A500741C3F3 /* Components */,
+				CBDD19AABFBD8AD3F79B0A8F /* Diagnosis */,
+				4A9B2D16B1C11CF0C1645ED9 /* Home */,
+				80ABAE32979B241E89BE2088 /* MyProducts */,
+				90C2ECEED8283D1CDF2F7CE5 /* Onboarding */,
+				2EE9FF5A374DB7068DA0B210 /* Profile */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		05C60D8AE48224AE82381E00 /* ChatAgent */ = {
+			isa = PBXGroup;
+			children = (
+				C602BFB7D8BF56EF2DE609E4 /* ChatAgentView.swift */,
+			);
+			path = ChatAgent;
+			sourceTree = "<group>";
+		};
+		17C191550969E72CE695D2F6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				5ADC1A577765340D300F3304 /* ChemiCheckApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		2E15D9A8E352E0A00D9035E2 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				05510DE0CBAABD81F056506B /* AppState.swift */,
+				4C365A41A633B2300D3AB050 /* ChatAgentViewModel.swift */,
+				874F522E09791537D6B0F853 /* DiagnosisViewModel.swift */,
+				D17724F1279DEAE6E0EC5B42 /* MyProductsViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2EE9FF5A374DB7068DA0B210 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				20DF727FFB7AC210FE4A8E48 /* MyPageView.swift */,
+				F298ADE4C540BD93F119E7B8 /* ProfileEditView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		35C363B050250839FF463310 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F638EC66C9B07AD26373DD5F /* ChemiCheck.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4A9B2D16B1C11CF0C1645ED9 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				6F849FC07E87E4B724EBD1EA /* HomeView.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		4FD0C91E56245A500741C3F3 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				4E78F099E56C0C3DCB90737F /* AlternativeCard.swift */,
+				1820A4E96B7F9D87BBF0CFF0 /* ChemicalChip.swift */,
+				1411C5D213606E031DC3D637 /* ProductCard.swift */,
+				2386041123ACDADD5E31EE40 /* RiskBadge.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		66E2F94F184D890554887270 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5EDEE2EE832D9049B11DEBA3 /* AVFoundation.framework */,
+				DB99269169B9AEEB5A9C4122 /* CoreLocation.framework */,
+				291DEC959BC5CDDFA78B4AFD /* UserNotifications.framework */,
+				CA3CBB0E572D0B1139BEB98D /* Vision.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		789B8FBB2FF36A305CAEEB04 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				EE64F110B071515555603942 /* CameraView.swift */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		80ABAE32979B241E89BE2088 /* MyProducts */ = {
+			isa = PBXGroup;
+			children = (
+				2FD55572CA47D4D3E045B030 /* MyProductsView.swift */,
+				DA194BB530DE665990453F8E /* NotificationDetailView.swift */,
+			);
+			path = MyProducts;
+			sourceTree = "<group>";
+		};
+		90C2ECEED8283D1CDF2F7CE5 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				8F8C307C65E184B5BD6919DA /* OnboardingView.swift */,
+				15BB7703DE7244F982E90B44 /* SplashView.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
+		9CE74972FDEBBC091D260F48 /* DummyData */ = {
+			isa = PBXGroup;
+			children = (
+				FD0A6AC714D64CC42E20537F /* alternatives.json */,
+				B5191F82D1E17E1AA8E0F713 /* chemicals.json */,
+				424F0733C88A59A5A8C088C9 /* products.json */,
+			);
+			path = DummyData;
+			sourceTree = "<group>";
+		};
+		AAC8BAF5B838DE617C8FD99B /* ChemiCheck */ = {
+			isa = PBXGroup;
+			children = (
+				17C191550969E72CE695D2F6 /* App */,
+				AD5F6F4FF742E75B3AC12934 /* Models */,
+				FE7900A7A076FB12111D92E3 /* Resources */,
+				BDC59332AF7B117F14D6A451 /* Services */,
+				AD296954D75140B3ED93EDE7 /* Storage */,
+				BC358A0C5687A2A4AEB69394 /* Theme */,
+				2E15D9A8E352E0A00D9035E2 /* ViewModels */,
+				046B33B2895E15ACD903574F /* Views */,
+			);
+			path = ChemiCheck;
+			sourceTree = "<group>";
+		};
+		AD296954D75140B3ED93EDE7 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				2877B3BA8F0980AE3E3F48EE /* DummyDataLoader.swift */,
+				9CE74972FDEBBC091D260F48 /* DummyData */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
+		AD5F6F4FF742E75B3AC12934 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				296AB8B3B30EA6703AA16B01 /* Alternative.swift */,
+				BCB4C9DE6B4BF2487BD38AFC /* ChatMessage.swift */,
+				279B692FD60DF389EF8B81A1 /* Chemical.swift */,
+				84F21C42955811F4C0A42CB6 /* FamilyProfile.swift */,
+				F66DEB1EE73144D0DAF586B6 /* Product.swift */,
+				FA8DB6F95CFD0A31A61D4CB8 /* RiskLevel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		BC358A0C5687A2A4AEB69394 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				55411CF2D1464739B55B1179 /* Color+Extension.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		BDC59332AF7B117F14D6A451 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				B9FCD21BF5BA5312E808FA00 /* AIAgentService.swift */,
+				4C1EB85EA70E55588F59193F /* AirKoreaAPIService.swift */,
+				2EE42E621D885B85F6EBFC02 /* FoodDrugAPIService.swift */,
+				DB79BEAE5E2FCB063550E0F4 /* KEITIAPIService.swift */,
+				F372B85495A6E3D17ACEC8AA /* NotificationService.swift */,
+				94DF0501D66D34F730963028 /* OCRService.swift */,
+				5D406A61CFE75CD9EF5611A7 /* RiskCalculator.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CBDD19AABFBD8AD3F79B0A8F /* Diagnosis */ = {
+			isa = PBXGroup;
+			children = (
+				1B507EA880AA4B436B5B7B07 /* AlternativeDetailView.swift */,
+				D066FDC2C67450975F95091E /* DiagnosisResultView.swift */,
+			);
+			path = Diagnosis;
+			sourceTree = "<group>";
+		};
+		E5BCBF225FB8DEA17BB4418A = {
+			isa = PBXGroup;
+			children = (
+				AAC8BAF5B838DE617C8FD99B /* ChemiCheck */,
+				66E2F94F184D890554887270 /* Frameworks */,
+				35C363B050250839FF463310 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		FE7900A7A076FB12111D92E3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9E13FB28FB9F5284601DAAB4 /* Assets.xcassets */,
+				F2FFC43A81C5FCAFFF152E21 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6001AB800D8615682A9600B3 /* ChemiCheck */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 643C41FB7E009B42C6007070 /* Build configuration list for PBXNativeTarget "ChemiCheck" */;
+			buildPhases = (
+				EFCBB4EB7D6F20F083AF13D6 /* Sources */,
+				D971342B42AE8745C689B584 /* Resources */,
+				0A8BF472711A308192A8C267 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ChemiCheck;
+			packageProductDependencies = (
+			);
+			productName = ChemiCheck;
+			productReference = F638EC66C9B07AD26373DD5F /* ChemiCheck.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		9068544817C705CC611D9F04 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+				};
+			};
+			buildConfigurationList = 1631904788850BBB0E2B5678 /* Build configuration list for PBXProject "ChemiCheck" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = E5BCBF225FB8DEA17BB4418A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 35C363B050250839FF463310 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6001AB800D8615682A9600B3 /* ChemiCheck */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D971342B42AE8745C689B584 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1916511FC9A479D08AD3602D /* Assets.xcassets in Resources */,
+				296E75FFF66AB5942B33E26A /* alternatives.json in Resources */,
+				EDDBA06E337FC557779C6A85 /* chemicals.json in Resources */,
+				310845AF2644F70BD69888AF /* products.json in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		EFCBB4EB7D6F20F083AF13D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8AA330C7705F84C7E31A3415 /* AIAgentService.swift in Sources */,
+				85E7ED66ED144C8008102CBD /* AirKoreaAPIService.swift in Sources */,
+				E4F76765138245E69A9BEB7F /* Alternative.swift in Sources */,
+				FA75555A5DA758236C1EBEB3 /* AlternativeCard.swift in Sources */,
+				BA287B005F9358D3F9F45FD4 /* AlternativeDetailView.swift in Sources */,
+				611E49E904937781EBD5F656 /* AppState.swift in Sources */,
+				99E3AD74F367F292315242B9 /* CameraView.swift in Sources */,
+				BF0F7653C7DA61AE046CE666 /* ChatAgentView.swift in Sources */,
+				0B18FFB323E34C7788C571EC /* ChatAgentViewModel.swift in Sources */,
+				1B70023C05E98337E0EF96B9 /* ChatMessage.swift in Sources */,
+				D3D017C23164AD63DBBF21B6 /* ChemiCheckApp.swift in Sources */,
+				952BBE588A16901E76F71A5B /* Chemical.swift in Sources */,
+				042C47164E54F060611ABA26 /* ChemicalChip.swift in Sources */,
+				1A60C3605A7C69739677D956 /* Color+Extension.swift in Sources */,
+				5BC48126D4120AEB2145A149 /* ContentView.swift in Sources */,
+				15EAD0C96AF3BE8BB5D48FE7 /* DiagnosisResultView.swift in Sources */,
+				84D8A232DD0E016D99AF5646 /* DiagnosisViewModel.swift in Sources */,
+				2359CF42BE537544794A2478 /* DummyDataLoader.swift in Sources */,
+				86265AC843F665093A3C41B2 /* FamilyProfile.swift in Sources */,
+				0D0A80DF6734990EDACC3EEA /* FoodDrugAPIService.swift in Sources */,
+				E2D4AB4B1B5EF6BABDE94552 /* HomeView.swift in Sources */,
+				AB1F7F08DFAF8940988ABE2A /* KEITIAPIService.swift in Sources */,
+				EBE99719130399BA948AEBC5 /* MyPageView.swift in Sources */,
+				79F7D363C8C5DA7F10F9985B /* MyProductsView.swift in Sources */,
+				6EB617A4D9AB527B7E34F5FB /* MyProductsViewModel.swift in Sources */,
+				2AFF3CE81069DD053AF10169 /* NotificationDetailView.swift in Sources */,
+				2D6A6CA152662E1994D9ED99 /* NotificationService.swift in Sources */,
+				6E69798B5845F2C7CE73EA7C /* OCRService.swift in Sources */,
+				62D0DD9FC2D8D19F3BD89DD1 /* OnboardingView.swift in Sources */,
+				F44B1E5D169F96CC9A29522A /* Product.swift in Sources */,
+				5B10184EC4F8048A0628A913 /* ProductCard.swift in Sources */,
+				EF7177DA13AB473DB9D8A2A5 /* ProfileEditView.swift in Sources */,
+				563CA78FFCD4FE9FE15E9250 /* RiskBadge.swift in Sources */,
+				5B36D9C8EF69A394B36280EB /* RiskCalculator.swift in Sources */,
+				831CE5B976023B4DCE31C529 /* RiskLevel.swift in Sources */,
+				C11158C6C843F15C90FFDD25 /* SplashView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		087F338BB95C71AECA1AAB85 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEW = YES;
+				INFOPLIST_FILE = ChemiCheck/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.medix.chemicheck;
+				PRODUCT_NAME = "케미체크";
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4E47927C9F3CBF6B0D0EE594 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Debug;
+		};
+		4F914A5E9355ABBF73E2628C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 5.9;
+			};
+			name = Release;
+		};
+		66DFA01E1B90CFB46B83A0A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_PREVIEW = YES;
+				INFOPLIST_FILE = ChemiCheck/Resources/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.medix.chemicheck;
+				PRODUCT_NAME = "케미체크";
+				SDKROOT = iphoneos;
+				SWIFT_STRICT_CONCURRENCY = minimal;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1631904788850BBB0E2B5678 /* Build configuration list for PBXProject "ChemiCheck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4E47927C9F3CBF6B0D0EE594 /* Debug */,
+				4F914A5E9355ABBF73E2628C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		643C41FB7E009B42C6007070 /* Build configuration list for PBXNativeTarget "ChemiCheck" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				087F338BB95C71AECA1AAB85 /* Debug */,
+				66DFA01E1B90CFB46B83A0A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 9068544817C705CC611D9F04 /* Project object */;
+}

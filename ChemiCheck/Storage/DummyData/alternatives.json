@@ -1,0 +1,98 @@
+[
+  {
+    "id": "alt_001",
+    "name": "에코하우스 욕실 클리너",
+    "brand": "에코하우스",
+    "riskLevel": 1,
+    "certifications": ["환경표지 인증", "전성분 공개"],
+    "price": "₩12,900",
+    "availableAt": ["쿠팡", "네이버쇼핑", "이마트몰"],
+    "description": "천연 시트르산과 식물성 계면활성제로 만든 욕실 클리너. 강력한 세정력은 유지하면서 환경표지 인증을 받은 안전한 제품입니다.",
+    "category": "욕실 세정제",
+    "imageSystemName": "drop.fill"
+  },
+  {
+    "id": "alt_002",
+    "name": "베이킹소다 욕실 클리너",
+    "brand": "그린케어",
+    "riskLevel": 1,
+    "certifications": ["천연성분", "전성분 공개", "영유아 안전 인증"],
+    "price": "₩8,900",
+    "availableAt": ["올리브영", "쿠팡", "G마켓"],
+    "description": "베이킹소다와 구연산을 주성분으로 하는 100% 천연 욕실 클리너. 영유아와 반려동물이 있는 가정에서도 안심하고 사용할 수 있습니다.",
+    "category": "욕실 세정제",
+    "imageSystemName": "bubbles.and.sparkles.fill"
+  },
+  {
+    "id": "alt_003",
+    "name": "내추럴클린 스케일 제거제",
+    "brand": "내추럴클린",
+    "riskLevel": 1,
+    "certifications": ["천연성분", "환경표지 인증"],
+    "price": "₩9,500",
+    "availableAt": ["다이소", "쿠팡", "11번가"],
+    "description": "시트르산 기반 천연 스케일 제거제. 수돗물 석회질과 물때 제거에 탁월하며 유해 화학물질이 전혀 없습니다.",
+    "category": "욕실 세정제",
+    "imageSystemName": "leaf.fill"
+  },
+  {
+    "id": "alt_004",
+    "name": "퓨어베이비 세탁 세제",
+    "brand": "퓨어베이비",
+    "riskLevel": 1,
+    "certifications": ["영유아 안전 인증", "피부과 테스트 완료", "전성분 공개"],
+    "price": "₩18,900",
+    "availableAt": ["쿠팡", "마켓컬리", "올리브영"],
+    "description": "신생아부터 사용 가능한 저자극 세탁 세제. 피부과 전문의 테스트 완료, 형광증백제·파라벤·향료 무첨가.",
+    "category": "세탁 세제",
+    "imageSystemName": "tshirt.fill"
+  },
+  {
+    "id": "alt_005",
+    "name": "허브클린 주방 세정제",
+    "brand": "허브클린",
+    "riskLevel": 1,
+    "certifications": ["환경표지 인증", "천연성분"],
+    "price": "₩7,500",
+    "availableAt": ["이마트", "쿠팡", "홈플러스"],
+    "description": "허브 추출물과 식물성 계면활성제로 만든 주방 세정제. 설거지 후 잔류 계면활성제 걱정 없이 사용할 수 있습니다.",
+    "category": "주방 세정제",
+    "imageSystemName": "fork.knife"
+  },
+  {
+    "id": "alt_006",
+    "name": "에코스프레이 살균제",
+    "brand": "에코스프레이",
+    "riskLevel": 2,
+    "certifications": ["환경표지 인증"],
+    "price": "₩11,000",
+    "availableAt": ["쿠팡", "네이버쇼핑"],
+    "description": "차아염소산수(HOCL) 기반 살균 스프레이. 강력한 살균력을 유지하면서 인체에 무해하고 잔류물이 없습니다.",
+    "category": "살균제",
+    "imageSystemName": "shield.fill"
+  },
+  {
+    "id": "alt_007",
+    "name": "그린보이 다목적 클리너",
+    "brand": "그린보이",
+    "riskLevel": 1,
+    "certifications": ["환경표지 인증", "전성분 공개", "유기농 인증"],
+    "price": "₩13,500",
+    "availableAt": ["마켓컬리", "쿠팡", "SSG"],
+    "description": "유기농 에탄올과 식물성 원료로 만든 다목적 클리너. 주방, 욕실, 유아 장난감 등 온 집 안 어디서나 사용 가능합니다.",
+    "category": "다목적 세정제",
+    "imageSystemName": "sparkles"
+  },
+  {
+    "id": "alt_008",
+    "name": "솔잎향 천연 방향제",
+    "brand": "포레스트",
+    "riskLevel": 1,
+    "certifications": ["천연성분", "전성분 공개"],
+    "price": "₩15,000",
+    "availableAt": ["쿠팡", "올리브영", "아이허브"],
+    "description": "천연 에센셜 오일로 만든 방향제. 합성 향료와 프탈레이트 완전 배제. 아로마 테라피 등급 원료 사용.",
+    "category": "방향제",
+    "imageSystemName": "wind"
+  }
+]
