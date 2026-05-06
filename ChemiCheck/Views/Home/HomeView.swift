@@ -123,11 +123,11 @@ struct HomeView: View {
                     .font(.system(size: 22, weight: .bold))
                     .foregroundStyle(Color.textPrimary)
                     .kerning(-0.5)
-                HStack(spacing: 3) {
+                HStack(spacing: 4) {
                     Text("이번 주도 좋아요")
                         .fontWeight(.bold)
                         .foregroundStyle(Color.greenDeep)
-                    Text("✨")
+                    TFIcon.sparkle(size: 18)
                 }
                 .font(.system(size: 15))
             }
@@ -342,18 +342,18 @@ struct HomeView: View {
     // MARK: - 우리집 노출 맵 (HTML: .s1-map, .s1-rooms 2x2 grid)
 
     private struct Room {
-        let emoji: String
+        let icon: AnyView
         let name: String
         let status: String
-        let dotColor: Color  // peach / green / butter
+        let dotColor: Color
     }
 
-    private let rooms: [Room] = [
-        Room(emoji: "🛁", name: "욕실",   status: "주의 1건", dotColor: .peach),
-        Room(emoji: "🍳", name: "주방",   status: "안전",     dotColor: .brandGreen),
-        Room(emoji: "🛏️", name: "아기방", status: "안전",     dotColor: .brandGreen),
-        Room(emoji: "🧺", name: "세탁실", status: "주의 1건", dotColor: .butter),
-    ]
+    private var rooms: [Room] {[
+        Room(icon: AnyView(TFIcon.bathroom(size: 28)), name: "욕실",   status: "주의 1건", dotColor: .peach),
+        Room(icon: AnyView(TFIcon.kitchen(size: 28)),  name: "주방",   status: "안전",     dotColor: .brandGreen),
+        Room(icon: AnyView(TFIcon.babyRoom(size: 28)), name: "아기방", status: "안전",     dotColor: .brandGreen),
+        Room(icon: AnyView(TFIcon.laundry(size: 28)),  name: "세탁실", status: "주의 1건", dotColor: .butter),
+    ]}
 
     private var exposureMapCard: some View {
         VStack(alignment: .leading, spacing: 10) {
@@ -391,8 +391,7 @@ struct HomeView: View {
     // HTML: .s1-room { background: var(--surface-2); border-radius: 10px; padding: 8px 10px; }
     private func roomCell(_ room: Room) -> some View {
         HStack(spacing: 8) {
-            Text(room.emoji)
-                .font(.system(size: 16))
+            room.icon
 
             VStack(alignment: .leading, spacing: 1) {
                 Text(room.name)

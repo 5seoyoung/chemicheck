@@ -62,8 +62,7 @@ struct MyProductsView: View {
                     .opacity(pulsing ? 0 : 0.7)
                     .animation(.easeOut(duration: 1.1).repeatForever(autoreverses: false), value: pulsing)
 
-                Text("🚨")
-                    .font(.system(size: 22))
+                TFIcon.recall(size: 36)
             }
             .frame(width: 48, height: 48)
 

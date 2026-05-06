@@ -38,6 +38,7 @@
 		93D385C4DA037BCA06906559 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99269169B9AEEB5A9C4122 /* CoreLocation.framework */; };
 		952BBE588A16901E76F71A5B /* Chemical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279B692FD60DF389EF8B81A1 /* Chemical.swift */; };
 		99E3AD74F367F292315242B9 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE64F110B071515555603942 /* CameraView.swift */; };
+		AAA23B5727D7BAB33C43AFD1 /* TFIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EA9A6E2D86157A114CFE2E /* TFIcon.swift */; };
 		AB1F7F08DFAF8940988ABE2A /* KEITIAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB79BEAE5E2FCB063550E0F4 /* KEITIAPIService.swift */; };
 		BA287B005F9358D3F9F45FD4 /* AlternativeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B507EA880AA4B436B5B7B07 /* AlternativeDetailView.swift */; };
 		BF0F7653C7DA61AE046CE666 /* ChatAgentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C602BFB7D8BF56EF2DE609E4 /* ChatAgentView.swift */; };
@@ -92,6 +93,7 @@
 		DA194BB530DE665990453F8E /* NotificationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationDetailView.swift; sourceTree = "<group>"; };
 		DB79BEAE5E2FCB063550E0F4 /* KEITIAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KEITIAPIService.swift; sourceTree = "<group>"; };
 		DB99269169B9AEEB5A9C4122 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E5EA9A6E2D86157A114CFE2E /* TFIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TFIcon.swift; sourceTree = "<group>"; };
 		EE64F110B071515555603942 /* CameraView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		F298ADE4C540BD93F119E7B8 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		F2FFC43A81C5FCAFFF152E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				1820A4E96B7F9D87BBF0CFF0 /* ChemicalChip.swift */,
 				1411C5D213606E031DC3D637 /* ProductCard.swift */,
 				2386041123ACDADD5E31EE40 /* RiskBadge.swift */,
+				E5EA9A6E2D86157A114CFE2E /* TFIcon.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -436,6 +439,7 @@
 				5B36D9C8EF69A394B36280EB /* RiskCalculator.swift in Sources */,
 				831CE5B976023B4DCE31C529 /* RiskLevel.swift in Sources */,
 				C11158C6C843F15C90FFDD25 /* SplashView.swift in Sources */,
+				AAA23B5727D7BAB33C43AFD1 /* TFIcon.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

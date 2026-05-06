@@ -52,9 +52,12 @@ struct MyPageView: View {
             }
 
             VStack(spacing: 4) {
-                Text("우리 가족 🏠")
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundStyle(Color.textPrimary)
+                HStack(spacing: 6) {
+                    Text("우리 가족")
+                        .font(.system(size: 20, weight: .bold))
+                        .foregroundStyle(Color.textPrimary)
+                    TFIcon.home(size: 24)
+                }
 
                 Text(appState.familyProfile.memberSummary)
                     .font(.system(size: 13))

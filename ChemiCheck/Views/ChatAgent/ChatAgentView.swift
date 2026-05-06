@@ -65,14 +65,8 @@ struct ChatAgentView: View {
 
     private var welcomeHeader: some View {
         VStack(spacing: 20) {
-            ZStack {
-                Circle()
-                    .fill(Color.bgSecondary)
-                    .frame(width: 84, height: 84)
-                Text("🤖")
-                    .font(.system(size: 40))
-            }
-            .padding(.top, 36)
+            TFIcon.aiAvatar(size: 84)
+                .padding(.top, 36)
 
             VStack(spacing: 5) {
                 Text("케미체크 AI 상담사")
@@ -85,15 +79,9 @@ struct ChatAgentView: View {
             }
 
             HStack(spacing: 6) {
-                ForEach(["🏛 식약처", "🌿 환경부", "🔬 안전보건공단"], id: \.self) { source in
-                    Text(source)
-                        .font(.system(size: 11, weight: .medium))
-                        .foregroundStyle(Color.brandNavy)
-                        .padding(.vertical, 4)
-                        .padding(.horizontal, 9)
-                        .background(Color.bgSecondary)
-                        .clipShape(Capsule())
-                }
+                TFIcon.mfds()
+                TFIcon.moe()
+                TFIcon.kosha()
             }
 
             HStack(spacing: 5) {
@@ -195,13 +183,7 @@ struct MessageBubble: View {
         HStack(alignment: .bottom, spacing: 8) {
             if message.role == .assistant {
                 // Avatar
-                ZStack {
-                    Circle()
-                        .fill(Color.bgSecondary)
-                        .frame(width: 32, height: 32)
-                    Text("🤖")
-                        .font(.system(size: 16))
-                }
+                TFIcon.aiAvatar(size: 32)
                 bubbleContent
                 Spacer(minLength: 48)
             } else {
