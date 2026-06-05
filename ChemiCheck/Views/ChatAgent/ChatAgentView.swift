@@ -50,7 +50,7 @@ struct ChatAgentView: View {
                 inputBar
             }
             .background(Color.bgPrimary)
-            .navigationTitle(contextProduct != nil ? "\(contextProduct!.name) AI 상담" : "AI 화학물질 상담")
+            .navigationTitle(contextProduct.map { "\($0.name) AI 상담" } ?? "AI 화학물질 상담")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {

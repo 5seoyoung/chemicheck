@@ -1,5 +1,6 @@
 import SwiftUI
 
+@MainActor
 @Observable
 final class ChatAgentViewModel {
     var messages: [ChatMessage] = []
@@ -27,16 +28,19 @@ final class ChatAgentViewModel {
         isTyping = true
         messages.append(ChatMessage(role: .assistant, content: "", isTyping: true))
 
+        let capturedProduct = contextProduct
         currentTask = Task {
             let result = await AIAgentService.shared.ask(
                 question: text,
-                product: contextProduct,
+                product: capturedProduct,
                 familyProfile: familyProfile
             )
             guard !Task.isCancelled else { return }
-            messages.removeLast()
-            messages.append(ChatMessage(role: .assistant, content: result.content, sources: result.sources))
-            isTyping = false
+            await MainActor.run {
+                messages.removeLast()
+                messages.append(ChatMessage(role: .assistant, content: result.content, sources: result.sources))
+                isTyping = false
+            }
         }
         await currentTask?.value
     }
