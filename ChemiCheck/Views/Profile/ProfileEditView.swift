@@ -84,6 +84,11 @@ struct ProfileEditView: View {
                         }
                     }
 
+                    // Elderly section
+                    profileSection(title: "노약자 (65세 이상)", icon: "figure.walk.circle.fill", color: .skyFg) {
+                        toggleRow(title: "노약자 가족 있음", isOn: $profile.hasElderly)
+                    }
+
                     // Pet section
                     profileSection(title: "반려동물", icon: "pawprint.fill", color: .brandNavy) {
                         toggleRow(title: "반려동물 있음", isOn: $profile.hasPet)

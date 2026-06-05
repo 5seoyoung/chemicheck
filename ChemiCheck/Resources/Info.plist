@@ -23,9 +23,11 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
-	<string>케미체크가 제품 라벨을 촬영하기 위해 카메라 접근이 필요합니다.</string>
+	<string>케미체크가 제품 라벨을 촬영하기 위해 카메라 접근이 필요합니다. 촬영된 이미지는 기기 내에서만 처리되며 외부 서버로 전송되지 않습니다.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>갤러리에서 제품 라벨 사진을 선택하기 위해 접근이 필요합니다.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>현재 위치의 대기질 정보를 가져오기 위해 위치 접근이 필요합니다.</string>
+	<string>현재 위치의 실시간 대기질(PM2.5) 정보를 가져와 환기 가이드를 제공하기 위해 위치 접근이 필요합니다.</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -35,7 +37,7 @@
 	<dict/>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
-		<string>armv7</string>
+		<string>arm64</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

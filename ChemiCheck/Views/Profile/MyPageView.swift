@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct MyPageView: View {
     @Environment(AppState.self) private var appState
@@ -158,11 +159,23 @@ struct MyPageView: View {
                     showProfileEdit = true
                 }
                 Divider().padding(.leading, 52)
-                settingsRow(icon: "bell.fill", color: .riskMedium, title: "알림 설정") {}
+                settingsRow(icon: "bell.fill", color: .riskMedium, title: "알림 설정") {
+                    if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
+                        UIApplication.shared.open(url)
+                    }
+                }
                 Divider().padding(.leading, 52)
-                settingsRow(icon: "lock.fill", color: .brandGreen, title: "개인정보 처리방침") {}
+                settingsRow(icon: "lock.fill", color: .brandGreen, title: "개인정보 처리방침") {
+                    if let url = URL(string: "https://chemicheck.notion.site/privacy") {
+                        UIApplication.shared.open(url)
+                    }
+                }
                 Divider().padding(.leading, 52)
-                settingsRow(icon: "questionmark.circle.fill", color: .textTertiary, title: "고객 지원") {}
+                settingsRow(icon: "questionmark.circle.fill", color: .textTertiary, title: "고객 지원") {
+                    if let url = URL(string: "mailto:inmani1555@gmail.com?subject=케미체크 문의") {
+                        UIApplication.shared.open(url)
+                    }
+                }
             }
             .cardStyle()
         }
@@ -201,7 +214,7 @@ struct MyPageView: View {
                     Text("체크").foregroundStyle(Color.brandGreen)
                 }
                 .font(.system(size: 16, weight: .bold))
-                Text("v1.0.0 · MediX")
+                Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") · MediX")
                     .font(.system(size: 12))
                     .foregroundStyle(Color.textTertiary)
             }

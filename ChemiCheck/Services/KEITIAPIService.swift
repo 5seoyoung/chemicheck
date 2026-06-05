@@ -1,20 +1,18 @@
 import Foundation
 
-// Stage 2: 환경부 KEITI 초록누리 데이터 연동
 final class KEITIAPIService {
     static let shared = KEITIAPIService()
     private init() {}
 
-    // 환경표지 인증제품 조회
-    func fetchEcoLabelProducts(category: String) async throws -> [EcoLabelProduct] {
-        // Stage 2 구현 예정
-        throw ServiceError.notImplemented
+    // 환경표지 인증제품 조회 — 현재 로컬 alternatives 데이터로 커버
+    // REST API 연동 시 여기에 구현
+    func fetchEcoLabelProducts(category: String) async -> [EcoLabelProduct] {
+        return []
     }
 
-    // 안전확인대상 생활화학제품 신고증명서 조회
-    func fetchSafetyConfirmation(productName: String) async throws -> SafetyConfirmation? {
-        // Stage 2 구현 예정
-        throw ServiceError.notImplemented
+    // 안전확인대상 생활화학제품 신고증명서 조회 — 현재 로컬 캐시로 커버
+    func fetchSafetyConfirmation(productName: String) async -> SafetyConfirmation? {
+        return nil
     }
 
     struct EcoLabelProduct: Codable {
@@ -34,7 +32,6 @@ final class KEITIAPIService {
     }
 
     enum ServiceError: Error {
-        case notImplemented
         case networkError(Error)
     }
 }

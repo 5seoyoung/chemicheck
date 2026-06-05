@@ -1,7 +1,9 @@
 import SwiftUI
+import UIKit
 
 struct NotificationDetailView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppState.self) private var appState
     let notification: RecallNotification
 
     var body: some View {
@@ -35,8 +37,14 @@ struct NotificationDetailView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) {
-                    Button("닫기") { dismiss() }
+                    Button("닫기") {
+                        appState.clearRecallNotification()
+                        dismiss()
+                    }
                 }
+            }
+            .onAppear {
+                appState.clearRecallNotification()
             }
         }
     }
@@ -181,19 +189,27 @@ struct NotificationDetailView: View {
     private var ctaButtons: some View {
         VStack(spacing: 10) {
             Button {
-                // 제조사 연락
+                // refundContact에서 전화번호 추출
+                let phoneNumber = extractPhoneNumber(from: notification.refundContact)
+                if let url = URL(string: "tel://\(phoneNumber)") {
+                    UIApplication.shared.open(url)
+                }
             } label: {
                 Label("제조사 고객센터 연결", systemImage: "phone.fill")
             }
             .primaryButton()
 
-            Button {
-                dismiss()
-            } label: {
-                Text("확인")
-            }
+            Button { dismiss() } label: { Text("확인") }
             .secondaryButton()
         }
+    }
+
+    private func extractPhoneNumber(from text: String) -> String {
+        let digits = text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+        // 1588-xxxx, 080-xxx 등 앞부분만 추출
+        let components = text.components(separatedBy: " / ")
+        let first = components.first ?? text
+        return first.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
     }
 }
 

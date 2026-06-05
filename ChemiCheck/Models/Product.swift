@@ -9,6 +9,7 @@ enum ProductCategory: String, Codable, CaseIterable {
     case insecticide   = "살충제"
     case multipurpose  = "다목적 세정제"
     case bleach        = "표백제"
+    case babyHygiene   = "아기 위생용품"
 }
 
 struct Product: Identifiable, Codable {

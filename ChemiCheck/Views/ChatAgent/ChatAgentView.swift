@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct ChatAgentView: View {
+    var contextProduct: Product? = nil
+
     @State private var chatVM = ChatAgentViewModel()
     @State private var scrollProxy: ScrollViewProxy? = nil
     @Environment(AppState.self) private var appState
@@ -48,7 +50,7 @@ struct ChatAgentView: View {
                 inputBar
             }
             .background(Color.bgPrimary)
-            .navigationTitle("AI 화학물질 상담")
+            .navigationTitle(contextProduct != nil ? "\(contextProduct!.name) AI 상담" : "AI 화학물질 상담")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -59,6 +61,9 @@ struct ChatAgentView: View {
                             .foregroundStyle(Color.brandNavy)
                     }
                 }
+            }
+            .onAppear {
+                chatVM.contextProduct = contextProduct
             }
         }
     }
@@ -76,6 +81,44 @@ struct ChatAgentView: View {
                     .font(.system(size: 13))
                     .foregroundStyle(Color.textSecondary)
                     .multilineTextAlignment(.center)
+            }
+
+            // 제품 컨텍스트 배너
+            if let p = chatVM.contextProduct {
+                HStack(spacing: 10) {
+                    Image(systemName: p.imageSystemName)
+                        .font(.system(size: 18))
+                        .foregroundStyle(Color.lavender)
+                        .frame(width: 36, height: 36)
+                        .background(Color.lavenderSoft)
+                        .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("현재 제품")
+                            .font(.system(size: 10, weight: .semibold))
+                            .foregroundStyle(Color.lavender)
+                        Text(p.name)
+                            .font(.system(size: 13, weight: .semibold))
+                            .foregroundStyle(Color.textPrimary)
+                            .lineLimit(1)
+                    }
+                    Spacer()
+                    Text(p.riskLevel.label)
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(p.riskLevel.color)
+                        .padding(.vertical, 4)
+                        .padding(.horizontal, 8)
+                        .background(p.riskLevel.backgroundColor)
+                        .clipShape(Capsule())
+                }
+                .padding(12)
+                .background(Color.lavenderSoft)
+                .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 14, style: .continuous)
+                        .stroke(Color.lavender.opacity(0.25), lineWidth: 1)
+                )
+                .padding(.horizontal, 4)
             }
 
             HStack(spacing: 6) {
@@ -169,7 +212,12 @@ struct ChatAgentView: View {
     }
 
     private func sendMessage() {
+        if chatVM.isTyping {
+            chatVM.cancelCurrentRequest()
+            return
+        }
         let text = chatVM.inputText
+        guard !text.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         Task { await chatVM.send(text, familyProfile: appState.familyProfile) }
     }
 }

@@ -28,6 +28,22 @@ final class RiskCalculator {
             if hasAllergen { level = min(level + 1, 5) }
         }
 
+        // Pet (especially cat) + neurotoxic/aquatic chemicals → +1
+        if profile.hasPet {
+            let hasPetRisk = product.chemicals.contains { chem in
+                chem.petRisk && (chem.concerns.contains(.neurotoxic) || chem.concerns.contains(.aquatic))
+            }
+            if hasPetRisk { level = min(level + 1, 5) }
+        }
+
+        // Elderly (senior) → +1 for respiratory or neurotoxic chemicals
+        if profile.hasElderly {
+            let hasElderlyRisk = product.chemicals.contains { chem in
+                (chem.infantRisk || chem.concerns.contains(.respiratory)) && chem.riskLevel.rawValue >= 3
+            }
+            if hasElderlyRisk { level = min(level + 1, 5) }
+        }
+
         return RiskLevel(rawValue: level) ?? product.riskLevel
     }
 
@@ -52,6 +68,13 @@ final class RiskCalculator {
             let chemicals = product.chemicals.filter { $0.allergyRisk }
             if !chemicals.isEmpty {
                 warnings.append("알레르기 유발 가능 — \(chemicals.map(\.name).joined(separator: ", "))이(가) 알레르기를 유발할 수 있어요")
+            }
+        }
+
+        if profile.hasElderly {
+            let chemicals = product.chemicals.filter { $0.concerns.contains(.respiratory) && $0.riskLevel.rawValue >= 3 }
+            if !chemicals.isEmpty {
+                warnings.append("노약자 주의 — \(chemicals.map(\.name).joined(separator: ", ")) 호흡기 자극 가능. 충분한 환기 필요해요")
             }
         }
 

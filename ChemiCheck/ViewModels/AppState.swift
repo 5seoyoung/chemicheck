@@ -1,5 +1,6 @@
 import SwiftUI
 import Combine
+import UserNotifications
 
 @Observable
 final class AppState {
@@ -9,9 +10,13 @@ final class AppState {
     var familyProfile: FamilyProfile {
         didSet { saveFamilyProfile() }
     }
-    var recentProducts: [Product] = []
+    var recentProducts: [Product] = [] {
+        didSet { saveRecentProducts() }
+    }
     var registeredProducts: [Product] = []
-    var notificationBadgeCount: Int = 0
+    var notificationBadgeCount: Int = 0 {
+        didSet { UNUserNotificationCenter.current().setBadgeCount(notificationBadgeCount) }
+    }
     var pendingRecall: RecallNotification? = nil
 
     init() {
@@ -26,19 +31,36 @@ final class AppState {
     }
 
     func addRecentProduct(_ product: Product) {
-        var p = product
-        recentProducts.removeAll { $0.id == p.id }
-        recentProducts.insert(p, at: 0)
-        if recentProducts.count > 20 { recentProducts = Array(recentProducts.prefix(20)) }
-        saveRecentProducts()
+        // didSet이 saveRecentProducts()를 처리하므로 명시적 호출 불필요
+        // 단, 여러 번 didSet이 트리거되는 것을 막기 위해 한 번에 수정
+        var updated = recentProducts
+        updated.removeAll { $0.id == product.id }
+        updated.insert(product, at: 0)
+        if updated.count > 20 { updated = Array(updated.prefix(20)) }
+        recentProducts = updated  // didSet 1회 트리거
     }
 
     func registerProduct(_ product: Product) {
         guard !registeredProducts.contains(where: { $0.id == product.id }) else { return }
         registeredProducts.append(product)
         saveRegisteredProducts()
-        // 등록 즉시 회수 목록 매칭 검사
-        checkRecallMatch(for: product)
+        // 이미 isRecalled 플래그인 경우 즉시 알림
+        if product.isRecalled {
+            let notification = RecallNotification(
+                product: product,
+                reason: product.recallReason ?? "환경부 회수 명령 대상 제품입니다.",
+                date: Date(),
+                severity: .critical,
+                refundGuide: "구매처에서 영수증 없이 전액 환불 가능합니다.",
+                agencyName: "환경부"
+            )
+            pendingRecall = notification
+            notificationBadgeCount += 1
+            NotificationService.shared.sendRecallNotification(product: product)
+        } else {
+            // 회수 목록에서 이름·키워드 매칭 검사
+            checkRecallMatch(for: product)
+        }
     }
 
     func unregisterProduct(_ product: Product) {
@@ -61,6 +83,11 @@ final class AppState {
         pendingRecall = notification
         notificationBadgeCount += 1
         NotificationService.shared.sendRecallNotification(product: product)
+    }
+
+    func clearRecallNotification() {
+        pendingRecall = nil
+        if notificationBadgeCount > 0 { notificationBadgeCount -= 1 }
     }
 
     func simulateRecallNotification() {

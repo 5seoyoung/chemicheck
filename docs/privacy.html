@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="케미체크 개인정보처리방침" />
+  <title>개인정보처리방침 — 케미체크</title>
+  <style>
+    :root {
+      --navy: #4A6B9C;
+      --navy-deep: #2E4A73;
+      --green: #5DBB94;
+      --bg: #FBFCFE;
+      --card: #FFFFFF;
+      --text1: #1F2937;
+      --text2: #5B6577;
+      --text3: #97A0AF;
+      --line: #EEF1F6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+                   "Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--text1);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    header {
+      background: var(--navy-deep);
+      padding: 28px 24px 24px;
+      text-align: center;
+    }
+
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    .logo-text {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .logo-kemi { color: #9BC8E8; }
+    .logo-check { color: #5DBB94; }
+
+    header p {
+      color: rgba(255,255,255,0.6);
+      font-size: 13px;
+    }
+
+    main {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+
+    .update-badge {
+      display: inline-block;
+      background: var(--green);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 10px;
+      border-radius: 20px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy-deep);
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+    }
+
+    .subtitle {
+      color: var(--text2);
+      font-size: 14px;
+      margin-bottom: 32px;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 22px 24px;
+      margin-bottom: 14px;
+      box-shadow: 0 2px 12px rgba(74,107,156,0.05);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .section-num {
+      background: var(--navy);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 800;
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    h2 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--navy-deep);
+    }
+
+    p { color: var(--text2); margin-bottom: 8px; font-size: 14px; }
+    p:last-child { margin-bottom: 0; }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li {
+      color: var(--text2);
+      font-size: 14px;
+      padding: 5px 0;
+      padding-left: 18px;
+      position: relative;
+    }
+
+    ul li::before {
+      content: "•";
+      position: absolute;
+      left: 4px;
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    .highlight {
+      background: #E3F5EC;
+      color: #1A6B4A;
+      border-radius: 8px;
+      padding: 12px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-top: 10px;
+    }
+
+    .highlight-icon { margin-right: 6px; }
+
+    .third-party-item {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+    }
+
+    .third-party-item:last-child { margin-bottom: 0; }
+
+    .tp-name {
+      font-weight: 700;
+      color: var(--navy);
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .tp-desc {
+      font-size: 13px;
+      color: var(--text2);
+      margin: 0;
+    }
+
+    .contact-card {
+      background: linear-gradient(135deg, #F4F8FE 0%, #EFE8F7 100%);
+      border: 1px solid #D8E8F8;
+      border-radius: 14px;
+      padding: 16px 18px;
+    }
+
+    .contact-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+    }
+
+    .contact-row:last-child { margin-bottom: 0; }
+
+    .contact-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--navy);
+      min-width: 60px;
+    }
+
+    .contact-val {
+      font-size: 13px;
+      color: var(--text2);
+    }
+
+    .contact-val a {
+      color: var(--navy);
+      text-decoration: none;
+    }
+
+    footer {
+      text-align: center;
+      padding: 24px;
+      color: var(--text3);
+      font-size: 12px;
+      border-top: 1px solid var(--line);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span class="logo-text">
+      <span class="logo-kemi">케미</span><span class="logo-check">체크</span>
+    </span>
+  </div>
+  <p>화학제품 안전 진단 · MediX</p>
+</header>
+
+<main>
+  <span class="update-badge">최종 수정일: 2026년 6월</span>
+  <h1>개인정보처리방침</h1>
+  <p class="subtitle">
+    케미체크(ChemiCheck)는 사용자의 개인정보를 소중히 여깁니다.<br>
+    본 방침은 앱이 수집·처리하는 정보와 그 목적을 투명하게 안내합니다.
+  </p>
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">1</div>
+      <h2>수집하는 정보</h2>
+    </div>
+    <ul>
+      <li>카메라로 촬영한 제품 라벨 이미지 — 기기 내에서만 처리되며 외부 서버로 전송되지 않습니다</li>
+      <li>가족 프로필 정보 (영유아 연령, 임신 여부, 알레르기·아토피 여부, 노약자 여부, 반려동물 종류) — 기기 내 저장</li>
+      <li>사용자가 등록한 제품 목록 및 진단 이력 — 기기 내 저장</li>
+      <li>AI 상담 질문 내용 — 답변 생성 후 서버에 저장되지 않습니다</li>
+    </ul>
+    <div class="highlight">
+      <span class="highlight-icon">🔒</span>
+      라벨 이미지와 가족 프로필은 외부 서버로 전송되지 않으며,
+      기기(iPhone)에만 저장됩니다.
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">2</div>
+      <h2>수집 목적</h2>
+    </div>
+    <ul>
+      <li>제품 라벨 화학물질 분석 및 위험도 산정</li>
+      <li>가족 구성원 맞춤 안전 정보 제공</li>
+      <li>회수·판매중지 고시 자동 매칭 및 푸시 알림 발송</li>
+      <li>실시간 대기질(PM2.5) 기반 환기 가이드 제공</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">3</div>
+      <h2>제3자 서비스 이용</h2>
+    </div>
+    <p>케미체크는 다음 제3자 서비스를 활용합니다. 각 서비스의 개인정보처리방침이 추가 적용됩니다.</p>
+    <div class="third-party-item">
+      <p class="tp-name">Anthropic Claude API</p>
+      <p class="tp-desc">AI 화학물질 상담 기능. 질문 내용은 답변 생성에만 사용되며 저장되지 않습니다.</p>
+    </div>
+    <div class="third-party-item">
+      <p class="tp-name">한국환경공단 에어코리아 OpenAPI</p>
+      <p class="tp-desc">실시간 대기질(PM2.5·PM10) 정보 제공. 위치 정보는 시도 단위로만 사용됩니다.</p>
+    </div>
+    <div class="third-party-item">
+      <p class="tp-name">식품의약품안전처 · 환경부 공공데이터</p>
+      <p class="tp-desc">화학물질 독성 정보 및 회수 고시 데이터. 개인정보 없이 공공데이터만 활용합니다.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">4</div>
+      <h2>정보 보관 및 삭제</h2>
+    </div>
+    <ul>
+      <li>가족 프로필 및 등록 제품 데이터: 앱 삭제 시 완전 삭제</li>
+      <li>진단 이력: 기기 내 최근 20건 보관 후 자동 삭제</li>
+      <li>라벨 이미지: 분석 즉시 메모리에서 삭제, 저장 없음</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">5</div>
+      <h2>사용자 권리</h2>
+    </div>
+    <ul>
+      <li>앱 삭제로 기기 내 저장 데이터 전체 삭제 가능</li>
+      <li>가족 프로필은 앱 내 마이페이지에서 언제든 수정·삭제 가능</li>
+      <li>푸시 알림은 기기 설정에서 언제든 해제 가능</li>
+    </ul>
+  </section>
+
+  <section>
+    <div class="section-header">
+      <div class="section-num">6</div>
+      <h2>개인정보 보호책임자 연락처</h2>
+    </div>
+    <div class="contact-card">
+      <div class="contact-row">
+        <span class="contact-label">서비스명</span>
+        <span class="contact-val">케미체크(ChemiCheck)</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">운영자</span>
+        <span class="contact-val">오서영 (MediX)</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">소속</span>
+        <span class="contact-val">국민대학교 AI빅데이터융합경영학과</span>
+      </div>
+      <div class="contact-row">
+        <span class="contact-label">이메일</span>
+        <span class="contact-val">
+          <a href="mailto:inmani1555@gmail.com">inmani1555@gmail.com</a>
+        </span>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 MediX · 케미체크(ChemiCheck) · 본 앱은 참고 목적으로 제공됩니다.
+</footer>
+
+</body>
+</html>

@@ -115,6 +115,7 @@ final class FoodDrugAPIService {
         if joined.contains("살균") || joined.contains("disinfect") || joined.contains("sanitize") { return .disinfectant }
         if joined.contains("살충") || joined.contains("insect") || joined.contains("모기") { return .insecticide }
         if joined.contains("표백") || joined.contains("bleach") || joined.contains("과산화수소") { return .bleach }
+        if joined.contains("아기") || joined.contains("베이비") || joined.contains("영유아") || joined.contains("baby") { return .babyHygiene }
         return .multipurpose
     }
 
@@ -184,6 +185,19 @@ final class FoodDrugAPIService {
 // MARK: - CacheEntry
 
 private struct CacheEntry {
+    // chemicals_cache.json은 영문 key 사용, ChemicalConcern rawValue는 한국어이므로 매핑 필요
+    static func mapConcern(_ str: String) -> ChemicalConcern? {
+        let map: [String: ChemicalConcern] = [
+            "respiratory":  .respiratory,
+            "endocrine":    .endocrine,
+            "carcinogenic": .carcinogenic,
+            "skin":         .skin,
+            "neurotoxic":   .neurotoxic,
+            "aquatic":      .aquatic,
+            "allergen":     .allergen
+        ]
+        return ChemicalConcern(rawValue: str) ?? map[str.lowercased()]
+    }
     let id: String
     let name: String
     let englishName: String
@@ -220,7 +234,7 @@ private struct CacheEntry {
 
     func toChemical() -> Chemical {
         let rl = RiskLevel(rawValue: riskLevel) ?? .safe
-        let concernObjs = concerns.compactMap { ChemicalConcern(rawValue: $0) }
+        let concernObjs = concerns.compactMap { CacheEntry.mapConcern($0) }
         return Chemical(
             id: id,
             name: name,

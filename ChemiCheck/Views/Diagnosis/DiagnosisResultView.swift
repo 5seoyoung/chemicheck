@@ -14,6 +14,7 @@ struct DiagnosisResultView: View {
     @State private var isRegistered = false
     @State private var riskBarAnimated: CGFloat = 0
     @State private var airQuality: AirKoreaAPIService.AirQualityInfo? = nil
+    @State private var showAIChat = false
 
     var body: some View {
         NavigationStack {
@@ -46,6 +47,11 @@ struct DiagnosisResultView: View {
                             .padding(.bottom, 20)
                     }
 
+                    // AI 상담 버튼
+                    aiChatButton
+                        .padding(.horizontal, 20)
+                        .padding(.bottom, 10)
+
                     // 등록 버튼
                     registerButton
                         .padding(.horizontal, 20)
@@ -69,7 +75,7 @@ struct DiagnosisResultView: View {
                     }
                 }
                 ToolbarItem(placement: .primaryAction) {
-                    Button {} label: {
+                    Button { shareProduct() } label: {
                         Image(systemName: "square.and.arrow.up")
                             .font(.system(size: 15))
                             .foregroundStyle(Color.brandNavy)
@@ -82,6 +88,9 @@ struct DiagnosisResultView: View {
         }
         .sheet(item: $showChemicalDetail) { chem in
             ChemicalDetailSheet(chemical: chem)
+        }
+        .sheet(isPresented: $showAIChat) {
+            ChatAgentView(contextProduct: product)
         }
         .onAppear {
             isRegistered = appState.registeredProducts.contains(where: { $0.id == product.id })
@@ -326,6 +335,51 @@ struct DiagnosisResultView: View {
                 .padding(.horizontal, 20)
             }
         }
+    }
+
+    // MARK: - 공유
+
+    private func shareProduct() {
+        let riskText = "위험도 \(adjustedRiskLevel.rawValue)/5단계 (\(adjustedRiskLevel.label))"
+        let chemText = product.chemicals.isEmpty ? "" : "\n주요 성분: \(product.chemicals.prefix(3).map(\.name).joined(separator: ", "))"
+        let text = "케미체크 진단 결과\n\n제품: \(product.name) (\(product.brand))\n\(riskText)\(chemText)\n\n자세한 성분 정보는 케미체크 앱에서 확인하세요."
+        let av = UIActivityViewController(activityItems: [text], applicationActivities: nil)
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let vc = windowScene.windows.first?.rootViewController {
+            vc.present(av, animated: true)
+        }
+    }
+
+    // MARK: - AI 상담 버튼
+
+    private var aiChatButton: some View {
+        Button {
+            showAIChat = true
+        } label: {
+            HStack(spacing: 10) {
+                TFIcon.aiAvatar(size: 22)
+                VStack(alignment: .leading, spacing: 1) {
+                    Text("이 제품에 대해 AI에게 물어보기")
+                        .font(.system(size: 15, weight: .semibold))
+                        .foregroundStyle(Color.lavender)
+                    Text("임신·영유아·반려동물 관련 질문 즉시 답변")
+                        .font(.system(size: 12))
+                        .foregroundStyle(Color.lavender.opacity(0.7))
+                }
+                Spacer()
+                Image(systemName: "chevron.right")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundStyle(Color.lavender.opacity(0.5))
+            }
+            .padding(16)
+            .background(Color.lavenderSoft)
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .overlay(
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .stroke(Color.lavender.opacity(0.3), lineWidth: 1)
+            )
+        }
+        .buttonStyle(.plain)
     }
 
     // MARK: - 등록 버튼

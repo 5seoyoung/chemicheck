@@ -1,4 +1,5 @@
 import SwiftUI
+import UIKit
 
 struct AlternativeDetailView: View {
     @Environment(\.dismiss) private var dismiss
@@ -25,8 +26,13 @@ struct AlternativeDetailView: View {
                         purchaseCard
 
                         // CTA
-                        Button("구매하러 가기") {}
-                            .primaryButton()
+                        Button("구매하러 가기") {
+                            let query = alternative.name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                            if let url = URL(string: "https://search.shopping.naver.com/search/all?query=\(query)") {
+                                UIApplication.shared.open(url)
+                            }
+                        }
+                        .primaryButton()
                     }
                     .padding(.horizontal, 20)
                     .padding(.bottom, 40)

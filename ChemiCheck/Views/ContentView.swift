@@ -44,6 +44,9 @@ struct ContentView: View {
                     Task {
                         await diagnosisVM.analyzeImage(image, for: appState.familyProfile)
                         await MainActor.run {
+                            if let p = diagnosisVM.currentProduct {
+                                appState.addRecentProduct(p)
+                            }
                             showDiagnosis = true
                         }
                     }

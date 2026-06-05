@@ -34,7 +34,9 @@ final class AirKoreaAPIService {
         guard let url = components.url else { return .fallback }
 
         do {
-            let (data, _) = try await URLSession.shared.data(from: url)
+            var req = URLRequest(url: url)
+            req.timeoutInterval = 5
+            let (data, _) = try await URLSession.shared.data(for: req)
             let json = try JSONSerialization.jsonObject(with: data) as? [String: Any]
             let response = json?["response"] as? [String: Any]
             let body     = response?["body"] as? [String: Any]

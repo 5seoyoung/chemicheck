@@ -18,8 +18,11 @@ struct HomeView: View {
     }
 
     private var allProducts: [Product] { DummyDataLoader.shared.products }
-    private var warnCount: Int { allProducts.filter { $0.riskLevel.rawValue >= 3 }.count }
-    private var safeCount: Int { allProducts.filter { $0.riskLevel.rawValue <= 2 }.count }
+    private var displayProducts: [Product] {
+        appState.registeredProducts.isEmpty ? [] : appState.registeredProducts
+    }
+    private var warnCount: Int { displayProducts.filter { $0.riskLevel.rawValue >= 3 }.count }
+    private var safeCount: Int { displayProducts.filter { $0.riskLevel.rawValue <= 2 }.count }
 
     private var scoreLabel: String {
         switch safetyScore {
@@ -149,10 +152,20 @@ struct HomeView: View {
 
     // MARK: - 헤더
 
+    private var scoreStatusMessage: String {
+        switch safetyScore {
+        case 90...100: return "우리집 매우 안전해요"
+        case 75..<90:  return "이번 주도 안전하게"
+        case 55..<75:  return "주의 필요한 제품이 있어요"
+        case 35..<55:  return "위험 성분을 확인해보세요"
+        default:       return "즉시 조치가 필요해요"
+        }
+    }
+
     private var headerSection: some View {
         HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 3) {
-                Text("안녕하세요, 지영님")
+                Text("우리 가족 화학제품 안전")
                     .font(.system(size: 12))
                     .foregroundStyle(Color.textTertiary)
                 Text("우리집 안전 점수")
@@ -160,9 +173,9 @@ struct HomeView: View {
                     .foregroundStyle(Color.textPrimary)
                     .kerning(-0.5)
                 HStack(spacing: 4) {
-                    Text("이번 주도 좋아요")
+                    Text(scoreStatusMessage)
                         .fontWeight(.bold)
-                        .foregroundStyle(Color.greenDeep)
+                        .foregroundStyle(safetyScore >= 75 ? Color.greenDeep : safetyScore >= 55 ? Color.butterFg : Color.riskHigh)
                     TFIcon.sparkle(size: 18)
                 }
                 .font(.system(size: 15))
@@ -255,17 +268,17 @@ struct HomeView: View {
                 .padding(.horizontal, 18)
 
             HStack {
-                Text("지난주 대비")
+                Text(appState.registeredProducts.isEmpty ? "제품을 등록하면 맞춤 점수를 계산해드려요" : "등록 제품 \(appState.registeredProducts.count)개 기준")
                     .font(.system(size: 10))
                     .foregroundStyle(Color.textTertiary)
                 Spacer()
                 HStack(spacing: 3) {
-                    Image(systemName: "chevron.up")
+                    Image(systemName: safetyScore >= 75 ? "shield.checkered" : "exclamationmark.shield")
                         .font(.system(size: 9, weight: .bold))
-                    Text("+5점 상승")
+                    Text(safetyScore >= 90 ? "매우 안전" : safetyScore >= 75 ? "안전" : safetyScore >= 55 ? "보통" : "주의")
                         .font(.system(size: 11, weight: .bold))
                 }
-                .foregroundStyle(Color.greenDeep)
+                .foregroundStyle(safetyScore >= 75 ? Color.greenDeep : safetyScore >= 55 ? Color.butterFg : Color.riskHigh)
             }
             .padding(.horizontal, 18)
             .padding(.vertical, 12)
@@ -303,22 +316,22 @@ struct HomeView: View {
                 iconSF: "exclamationmark.circle",
                 iconFg: Color.peachFg,
                 iconBg: Color.peachSoft,
-                value: "\(warnCount)",
+                value: displayProducts.isEmpty ? "-" : "\(warnCount)",
                 unit: "건",
                 label: "주의 필요",
                 barColor: Color.peach,
-                barFraction: Double(warnCount) / Double(max(allProducts.count, 1))
+                barFraction: Double(warnCount) / Double(max(displayProducts.count, 1))
             )
             // 안전 제품 (sky)
             quickCard(
                 iconSF: "checkmark",
                 iconFg: Color.skyFg,
                 iconBg: Color.skySoft,
-                value: "\(safeCount)",
+                value: displayProducts.isEmpty ? "-" : "\(safeCount)",
                 unit: "건",
                 label: "안전 제품",
                 barColor: Color.sky,
-                barFraction: Double(safeCount) / Double(max(allProducts.count, 1))
+                barFraction: Double(safeCount) / Double(max(displayProducts.count, 1))
             )
         }
     }
@@ -460,7 +473,7 @@ struct HomeView: View {
                     .font(.system(size: 14, weight: .bold))
                     .foregroundStyle(Color.textPrimary)
                 Spacer()
-                Button("전체 보기") {}
+                NavigationLink("전체 보기", destination: RecentProductsView())
                     .font(.system(size: 12, weight: .medium))
                     .foregroundStyle(Color.brandNavy)
             }

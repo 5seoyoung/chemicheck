@@ -131,6 +131,55 @@ final class OCRService {
         "염화나트륨": ["염화나트륨", "Sodium Chloride", "NaCl", "식염", "소금"],
         "초산": ["초산", "Acetic Acid", "아세트산", "acetic acid", "식초산"],
         "살리실산": ["살리실산", "Salicylic Acid", "salicylate"],
-        "에틸렌글리콜": ["에틸렌글리콜", "Ethylene Glycol", "모노에틸렌글리콜", "MEG", "glycol"]
+        "에틸렌글리콜": ["에틸렌글리콜", "Ethylene Glycol", "모노에틸렌글리콜", "MEG", "glycol"],
+        // 방부제 계열
+        "메틸파라벤": ["메틸파라벤", "methylparaben", "methyl paraben"],
+        "에틸파라벤": ["에틸파라벤", "ethylparaben", "ethyl paraben"],
+        "프로필파라벤": ["프로필파라벤", "propylparaben", "propyl paraben"],
+        "부틸파라벤": ["부틸파라벤", "butylparaben", "butyl paraben"],
+        "페녹시에탄올": ["페녹시에탄올", "phenoxyethanol", "2-phenoxyethanol"],
+        "소르빈산칼륨": ["소르빈산칼륨", "potassium sorbate", "sorbate"],
+        "안식향산나트륨": ["안식향산나트륨", "sodium benzoate", "벤조산나트륨"],
+        "이미다졸리디닐우레아": ["이미다졸리디닐우레아", "imidazolidinyl urea", "germall"],
+        "DMDM하이단토인": ["DMDM하이단토인", "DMDM hydantoin"],
+        "메틸이소티아졸리논": ["메틸이소티아졸리논", "methylisothiazolinone"],
+        // 계면활성제 계열
+        "소디움라우레스설페이트": ["소디움라우레스설페이트", "sodium laureth sulfate", "SLES", "라우레스황산나트륨"],
+        "코카미도프로필베타인": ["코카미도프로필베타인", "cocamidopropyl betaine", "CAPB"],
+        "알킬폴리글루코사이드": ["알킬폴리글루코사이드", "alkyl polyglucoside", "APG", "코코글루코사이드"],
+        "노닐페놀에톡실레이트": ["에톡시레이트", "nonylphenol", "NPE"],
+        // 향료 성분
+        "리모넨": ["리모넨", "limonene", "d-limonene"],
+        "리날로올": ["리날로올", "linalool"],
+        "제라니올": ["제라니올", "geraniol"],
+        "벤질알코올": ["벤질알코올", "benzyl alcohol"],
+        "신남알데히드": ["신남알데히드", "cinnamaldehyde", "계피향"],
+        "쿠마린": ["쿠마린", "coumarin"],
+        "머스크향료": ["머스크", "musk", "인공사향"],
+        // 용매
+        "에틸렌글리콜모노부틸에테르": ["에틸렌글리콜모노부틸에테르", "EGMBE", "2-butoxyethanol", "부톡시에탄올"],
+        "트리에탄올아민": ["트리에탄올아민", "triethanolamine", "TEA"],
+        // 내분비교란 물질
+        "프탈레이트": ["프탈레이트", "phthalate", "DEHP", "DBP"],
+        "비스페놀A": ["비스페놀A", "bisphenol A", "BPA"],
+        "에톡시레이트": ["노닐페놀에톡실레이트", "nonylphenol ethoxylate", "nonylphenol"],
+        // 산화제·산·염기
+        "과초산": ["과초산", "peracetic acid", "PAA", "과아세트산"],
+        "염산": ["염산", "hydrochloric acid", "HCl"],
+        "수산화칼륨": ["수산화칼륨", "potassium hydroxide", "KOH", "가성칼리"],
+        "과탄산나트륨": ["과탄산나트륨", "sodium percarbonate", "산소계표백제"],
+        // 살생물제·살충제
+        "클로르헥시딘": ["클로르헥시딘", "chlorhexidine", "CHG"],
+        "사이페르메트린": ["사이페르메트린", "cypermethrin"],
+        "델타메트린": ["델타메트린", "deltamethrin"],
+        "알레트린": ["알레트린", "allethrin"],
+        "DEET": ["DEET", "디에틸톨루아미드"],
+        "은나노": ["은나노", "nano silver", "나노실버"],
+        // 기타
+        "탄산수소나트륨": ["탄산수소나트륨", "sodium bicarbonate", "베이킹소다", "중조"],
+        "형광증백제": ["형광증백제", "optical brightener", "OBA", "형광물질"],
+        "EDTA": ["EDTA", "에틸렌디아민테트라아세트산"],
+        "벤조페논": ["벤조페논", "benzophenone"],
+        "오르토페닐페놀": ["오르토페닐페놀", "OPP", "ortho-phenylphenol"]
     ]
 }

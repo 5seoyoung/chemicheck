@@ -5,9 +5,7 @@ import PhotosUI
 struct CameraView: View {
     @Environment(\.dismiss) private var dismiss
 
-    /// 실 라벨 사진 캡처 완료 콜백
     var onCapture: (UIImage) -> Void
-    /// 데모 모드: 목록에서 제품 직접 선택
     var onDemoSelect: (Product) -> Void
 
     @State private var isCapturing = false
@@ -15,6 +13,8 @@ struct CameraView: View {
     @State private var showDemoPicker = false
     @State private var selectedPhotoItem: PhotosPickerItem? = nil
     @State private var cameraCoordinator = CameraCoordinator()
+    @State private var cameraPermission: AVAuthorizationStatus = AVCaptureDevice.authorizationStatus(for: .video)
+    @State private var showPermissionAlert = false
 
     var body: some View {
         ZStack {
@@ -48,6 +48,25 @@ struct CameraView: View {
             }
         }
         .preferredColorScheme(.dark)
+        .onAppear {
+            requestCameraPermission()
+        }
+        .onDisappear {
+            cameraCoordinator.stopSession()
+        }
+        .alert("카메라 접근 권한 필요", isPresented: $showPermissionAlert) {
+            Button("설정으로 이동") {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            Button("갤러리에서 선택") {
+                showPermissionAlert = false
+            }
+            Button("취소", role: .cancel) { dismiss() }
+        } message: {
+            Text("라벨 촬영을 위해 카메라 접근을 허용해주세요.\n설정 > 케미체크 > 카메라")
+        }
         .sheet(isPresented: $showDemoPicker) {
             DemoProductPickerView(onSelect: { product in
                 showDemoPicker = false
@@ -202,16 +221,40 @@ struct CameraView: View {
         }
     }
 
+    // MARK: - 카메라 권한
+
+    private func requestCameraPermission() {
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            cameraPermission = .authorized
+        case .notDetermined:
+            AVCaptureDevice.requestAccess(for: .video) { granted in
+                DispatchQueue.main.async {
+                    cameraPermission = granted ? .authorized : .denied
+                    if !granted { showPermissionAlert = true }
+                }
+            }
+        case .denied, .restricted:
+            cameraPermission = .denied
+            showPermissionAlert = true
+        @unknown default:
+            break
+        }
+    }
+
     // MARK: - 셔터 캡처
 
     private func capturePhoto() {
+        guard cameraPermission == .authorized else {
+            showPermissionAlert = true
+            return
+        }
         isCapturing = true
         cameraCoordinator.capturePhoto { image in
             DispatchQueue.main.async {
                 if let img = image {
                     onCapture(img)
                 } else {
-                    // 실기기 캡처 실패 시 데모 피커로 폴백
                     isCapturing = false
                     showDemoPicker = true
                 }
@@ -263,6 +306,14 @@ final class CameraCoordinator: NSObject {
         captureCompletion = completion
         let settings = AVCapturePhotoSettings()
         output.capturePhoto(with: settings, delegate: self)
+    }
+
+    func stopSession() {
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            self?.session?.stopRunning()
+            self?.session = nil
+            self?.photoOutput = nil
+        }
     }
 
     func toggleFlash(_ on: Bool) {

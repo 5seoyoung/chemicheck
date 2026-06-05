@@ -28,9 +28,13 @@ struct MyProductsView: View {
                         productsList
                     }
 
-                    // Demo button
-                    demoSection
-                        .padding(.bottom, 100)
+                    // 데모 섹션: 데모 모드 ON일 때만 표시
+                    if DemoModeManager.shared.isOn {
+                        demoSection
+                            .padding(.bottom, 100)
+                    } else {
+                        Spacer().frame(height: 100)
+                    }
                 }
             }
             .background(Color.bgPrimary)

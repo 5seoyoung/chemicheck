@@ -7,6 +7,9 @@ enum CertificationType: String, Codable, CaseIterable {
     case dermatologistTested = "피부과 테스트 완료"
     case babyFriendly       = "영유아 안전 인증"
     case organic            = "유기농 인증"
+    case ewgGreen           = "EWG 그린"
+    case ewgGreenFull       = "EWG 그린 인증"
+    case foodDrugApproval   = "식약처 허가"
 }
 
 struct Alternative: Identifiable, Codable {
