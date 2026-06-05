@@ -102,7 +102,7 @@ struct ChatAgentView: View {
             HStack(spacing: 8) {
                 ForEach(chatVM.quickPrompts) { prompt in
                     Button {
-                        Task { await chatVM.send(prompt.text) }
+                        Task { await chatVM.send(prompt.text, familyProfile: appState.familyProfile) }
                     } label: {
                         HStack(spacing: 6) {
                             Image(systemName: prompt.icon)
@@ -170,7 +170,7 @@ struct ChatAgentView: View {
 
     private func sendMessage() {
         let text = chatVM.inputText
-        Task { await chatVM.send(text) }
+        Task { await chatVM.send(text, familyProfile: appState.familyProfile) }
     }
 }
 

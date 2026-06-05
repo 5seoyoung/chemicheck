@@ -21,6 +21,25 @@ struct HomeView: View {
     private var warnCount: Int { allProducts.filter { $0.riskLevel.rawValue >= 3 }.count }
     private var safeCount: Int { allProducts.filter { $0.riskLevel.rawValue <= 2 }.count }
 
+    private var scoreLabel: String {
+        switch safetyScore {
+        case 90...100: return "매우 안전"
+        case 75..<90:  return "안전"
+        case 55..<75:  return "보통"
+        case 35..<55:  return "주의 필요"
+        default:       return "위험"
+        }
+    }
+
+    private var scoreSubtext: String {
+        let registered = appState.registeredProducts.count
+        if registered == 0 {
+            return "제품을 등록하면\n맞춤 점수를 알 수 있어요"
+        }
+        let pct = max(1, min(99, 100 - safetyScore + 12))
+        return "등록 \(registered)개 기준\n상위 \(pct)% 수준이에요"
+    }
+
     var body: some View {
         NavigationStack {
             ZStack {
@@ -55,12 +74,24 @@ struct HomeView: View {
             .navigationBarHidden(true)
         }
         .sheet(isPresented: $showCamera) {
-            CameraView { product in
-                diagnosisVM.loadProduct(product, for: appState.familyProfile)
-                appState.addRecentProduct(product)
-                showCamera = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { showDiagnosis = true }
-            }
+            CameraView(
+                onCapture: { image in
+                    showCamera = false
+                    Task {
+                        await diagnosisVM.analyzeImage(image, for: appState.familyProfile)
+                        if let p = diagnosisVM.currentProduct {
+                            appState.addRecentProduct(p)
+                        }
+                        await MainActor.run { showDiagnosis = true }
+                    }
+                },
+                onDemoSelect: { product in
+                    diagnosisVM.loadProduct(product, for: appState.familyProfile)
+                    appState.addRecentProduct(product)
+                    showCamera = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { showDiagnosis = true }
+                }
+            )
         }
         .sheet(isPresented: $showDiagnosis) {
             if let p = diagnosisVM.currentProduct {
@@ -70,6 +101,8 @@ struct HomeView: View {
                     familyWarnings: diagnosisVM.familyWarnings,
                     alternatives: diagnosisVM.alternatives
                 )
+            } else if diagnosisVM.isAnalyzing {
+                AnalyzingView(step: diagnosisVM.analysisStep)
             }
         }
         .sheet(item: $selectedProduct) { p in
@@ -80,10 +113,13 @@ struct HomeView: View {
                 alternatives: p.alternativeIds.compactMap { DummyDataLoader.shared.alternative(for: $0) }
             )
         }
-        .onAppear {
-            withAnimation(.spring(response: 1.4, dampingFraction: 0.8).delay(0.25)) {
-                gaugeProgress = CGFloat(safetyScore) / 100.0
-            }
+        .onAppear { animateScore() }
+        .onChange(of: appState.registeredProducts.count) { animateScore() }
+    }
+
+    private func animateScore() {
+        withAnimation(.spring(response: 1.4, dampingFraction: 0.8).delay(0.15)) {
+            gaugeProgress = CGFloat(safetyScore) / 100.0
         }
     }
 
@@ -196,12 +232,13 @@ struct HomeView: View {
                         .foregroundStyle(Color.greenDeep)
                         .kerning(1.0)
 
-                    Text("매우 안전")
+                    Text(scoreLabel)
                         .font(.system(size: 15, weight: .bold))
                         .foregroundStyle(Color.textPrimary)
                         .kerning(-0.3)
+                        .animation(.easeInOut(duration: 0.3), value: safetyScore)
 
-                    Text("우리집 안전성이\n상위 12% 수준이에요")
+                    Text(scoreSubtext)
                         .font(.system(size: 10))
                         .foregroundStyle(Color.textSecondary)
                         .lineSpacing(2)

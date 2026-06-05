@@ -10,6 +10,7 @@
 		042C47164E54F060611ABA26 /* ChemicalChip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820A4E96B7F9D87BBF0CFF0 /* ChemicalChip.swift */; };
 		0B18FFB323E34C7788C571EC /* ChatAgentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C365A41A633B2300D3AB050 /* ChatAgentViewModel.swift */; };
 		0D0A80DF6734990EDACC3EEA /* FoodDrugAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EE42E621D885B85F6EBFC02 /* FoodDrugAPIService.swift */; };
+		1317EF454B48778865774630 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47C195EE9C2330DA93D33F62 /* Config.swift */; };
 		15EAD0C96AF3BE8BB5D48FE7 /* DiagnosisResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D066FDC2C67450975F95091E /* DiagnosisResultView.swift */; };
 		1916511FC9A479D08AD3602D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9E13FB28FB9F5284601DAAB4 /* Assets.xcassets */; };
 		1A60C3605A7C69739677D956 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55411CF2D1464739B55B1179 /* Color+Extension.swift */; };
@@ -19,6 +20,8 @@
 		2AFF3CE81069DD053AF10169 /* NotificationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA194BB530DE665990453F8E /* NotificationDetailView.swift */; };
 		2D6A6CA152662E1994D9ED99 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F372B85495A6E3D17ACEC8AA /* NotificationService.swift */; };
 		310845AF2644F70BD69888AF /* products.json in Resources */ = {isa = PBXBuildFile; fileRef = 424F0733C88A59A5A8C088C9 /* products.json */; };
+		34F1A55737DC0A8E64F58A59 /* recalls_curated.json in Resources */ = {isa = PBXBuildFile; fileRef = AAA3E08081FF55F207D947FB /* recalls_curated.json */; };
+		3958F5DDC5C2E901BFDBC602 /* chemicals_cache.json in Resources */ = {isa = PBXBuildFile; fileRef = F59C24E324989943F848DED1 /* chemicals_cache.json */; };
 		563CA78FFCD4FE9FE15E9250 /* RiskBadge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2386041123ACDADD5E31EE40 /* RiskBadge.swift */; };
 		5B10184EC4F8048A0628A913 /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411C5D213606E031DC3D637 /* ProductCard.swift */; };
 		5B36D9C8EF69A394B36280EB /* RiskCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D406A61CFE75CD9EF5611A7 /* RiskCalculator.swift */; };
@@ -38,6 +41,7 @@
 		93D385C4DA037BCA06906559 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99269169B9AEEB5A9C4122 /* CoreLocation.framework */; };
 		952BBE588A16901E76F71A5B /* Chemical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279B692FD60DF389EF8B81A1 /* Chemical.swift */; };
 		99E3AD74F367F292315242B9 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EE64F110B071515555603942 /* CameraView.swift */; };
+		9BEE0B604560B1D164BC8F79 /* RecallCuratedLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30C6B244868BBC95BDCC6CCF /* RecallCuratedLoader.swift */; };
 		AAA23B5727D7BAB33C43AFD1 /* TFIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5EA9A6E2D86157A114CFE2E /* TFIcon.swift */; };
 		AB1F7F08DFAF8940988ABE2A /* KEITIAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB79BEAE5E2FCB063550E0F4 /* KEITIAPIService.swift */; };
 		BA287B005F9358D3F9F45FD4 /* AlternativeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B507EA880AA4B436B5B7B07 /* AlternativeDetailView.swift */; };
@@ -69,7 +73,9 @@
 		296AB8B3B30EA6703AA16B01 /* Alternative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alternative.swift; sourceTree = "<group>"; };
 		2EE42E621D885B85F6EBFC02 /* FoodDrugAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDrugAPIService.swift; sourceTree = "<group>"; };
 		2FD55572CA47D4D3E045B030 /* MyProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProductsView.swift; sourceTree = "<group>"; };
+		30C6B244868BBC95BDCC6CCF /* RecallCuratedLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecallCuratedLoader.swift; sourceTree = "<group>"; };
 		424F0733C88A59A5A8C088C9 /* products.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = products.json; sourceTree = "<group>"; };
+		47C195EE9C2330DA93D33F62 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		4C1EB85EA70E55588F59193F /* AirKoreaAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirKoreaAPIService.swift; sourceTree = "<group>"; };
 		4C365A41A633B2300D3AB050 /* ChatAgentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAgentViewModel.swift; sourceTree = "<group>"; };
 		4E78F099E56C0C3DCB90737F /* AlternativeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeCard.swift; sourceTree = "<group>"; };
@@ -83,6 +89,7 @@
 		8F8C307C65E184B5BD6919DA /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		94DF0501D66D34F730963028 /* OCRService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OCRService.swift; sourceTree = "<group>"; };
 		9E13FB28FB9F5284601DAAB4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AAA3E08081FF55F207D947FB /* recalls_curated.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recalls_curated.json; sourceTree = "<group>"; };
 		B5191F82D1E17E1AA8E0F713 /* chemicals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = chemicals.json; sourceTree = "<group>"; };
 		B9FCD21BF5BA5312E808FA00 /* AIAgentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAgentService.swift; sourceTree = "<group>"; };
 		BCB4C9DE6B4BF2487BD38AFC /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
@@ -98,6 +105,7 @@
 		F298ADE4C540BD93F119E7B8 /* ProfileEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditView.swift; sourceTree = "<group>"; };
 		F2FFC43A81C5FCAFFF152E21 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F372B85495A6E3D17ACEC8AA /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		F59C24E324989943F848DED1 /* chemicals_cache.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = chemicals_cache.json; sourceTree = "<group>"; };
 		F638EC66C9B07AD26373DD5F /* ChemiCheck.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = ChemiCheck.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F66DEB1EE73144D0DAF586B6 /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
 		FA8DB6F95CFD0A31A61D4CB8 /* RiskLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskLevel.swift; sourceTree = "<group>"; };
@@ -147,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				5ADC1A577765340D300F3304 /* ChemiCheckApp.swift */,
+				47C195EE9C2330DA93D33F62 /* Config.swift */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -240,8 +249,10 @@
 			isa = PBXGroup;
 			children = (
 				FD0A6AC714D64CC42E20537F /* alternatives.json */,
+				F59C24E324989943F848DED1 /* chemicals_cache.json */,
 				B5191F82D1E17E1AA8E0F713 /* chemicals.json */,
 				424F0733C88A59A5A8C088C9 /* products.json */,
+				AAA3E08081FF55F207D947FB /* recalls_curated.json */,
 			);
 			path = DummyData;
 			sourceTree = "<group>";
@@ -265,6 +276,7 @@
 			isa = PBXGroup;
 			children = (
 				2877B3BA8F0980AE3E3F48EE /* DummyDataLoader.swift */,
+				30C6B244868BBC95BDCC6CCF /* RecallCuratedLoader.swift */,
 				9CE74972FDEBBC091D260F48 /* DummyData */,
 			);
 			path = Storage;
@@ -392,7 +404,9 @@
 				1916511FC9A479D08AD3602D /* Assets.xcassets in Resources */,
 				296E75FFF66AB5942B33E26A /* alternatives.json in Resources */,
 				EDDBA06E337FC557779C6A85 /* chemicals.json in Resources */,
+				3958F5DDC5C2E901BFDBC602 /* chemicals_cache.json in Resources */,
 				310845AF2644F70BD69888AF /* products.json in Resources */,
+				34F1A55737DC0A8E64F58A59 /* recalls_curated.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +431,7 @@
 				952BBE588A16901E76F71A5B /* Chemical.swift in Sources */,
 				042C47164E54F060611ABA26 /* ChemicalChip.swift in Sources */,
 				1A60C3605A7C69739677D956 /* Color+Extension.swift in Sources */,
+				1317EF454B48778865774630 /* Config.swift in Sources */,
 				5BC48126D4120AEB2145A149 /* ContentView.swift in Sources */,
 				15EAD0C96AF3BE8BB5D48FE7 /* DiagnosisResultView.swift in Sources */,
 				84D8A232DD0E016D99AF5646 /* DiagnosisViewModel.swift in Sources */,
@@ -435,6 +450,7 @@
 				F44B1E5D169F96CC9A29522A /* Product.swift in Sources */,
 				5B10184EC4F8048A0628A913 /* ProductCard.swift in Sources */,
 				EF7177DA13AB473DB9D8A2A5 /* ProfileEditView.swift in Sources */,
+				9BEE0B604560B1D164BC8F79 /* RecallCuratedLoader.swift in Sources */,
 				563CA78FFCD4FE9FE15E9250 /* RiskBadge.swift in Sources */,
 				5B36D9C8EF69A394B36280EB /* RiskCalculator.swift in Sources */,
 				831CE5B976023B4DCE31C529 /* RiskLevel.swift in Sources */,

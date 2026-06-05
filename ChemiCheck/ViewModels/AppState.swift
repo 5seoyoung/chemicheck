@@ -35,14 +35,32 @@ final class AppState {
 
     func registerProduct(_ product: Product) {
         guard !registeredProducts.contains(where: { $0.id == product.id }) else { return }
-        var p = product
-        registeredProducts.append(p)
+        registeredProducts.append(product)
         saveRegisteredProducts()
+        // 등록 즉시 회수 목록 매칭 검사
+        checkRecallMatch(for: product)
     }
 
     func unregisterProduct(_ product: Product) {
         registeredProducts.removeAll { $0.id == product.id }
         saveRegisteredProducts()
+    }
+
+    // MARK: - 회수 자동 매칭 (Tier 2.1)
+
+    private func checkRecallMatch(for product: Product) {
+        guard let entry = RecallCuratedLoader.shared.findMatch(for: product) else { return }
+        let notification = RecallNotification(
+            product: product,
+            reason: entry.violationType,
+            date: ISO8601DateFormatter().date(from: entry.recallDate + "T00:00:00Z") ?? Date(),
+            severity: .critical,
+            refundGuide: entry.refundContact,
+            agencyName: entry.reportNumber.contains("식약처") ? "식품의약품안전처" : "환경부"
+        )
+        pendingRecall = notification
+        notificationBadgeCount += 1
+        NotificationService.shared.sendRecallNotification(product: product)
     }
 
     func simulateRecallNotification() {

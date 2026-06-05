@@ -13,6 +13,7 @@ struct DiagnosisResultView: View {
     @State private var showChemicalDetail: Chemical? = nil
     @State private var isRegistered = false
     @State private var riskBarAnimated: CGFloat = 0
+    @State private var airQuality: AirKoreaAPIService.AirQualityInfo? = nil
 
     var body: some View {
         NavigationStack {
@@ -86,6 +87,9 @@ struct DiagnosisResultView: View {
             isRegistered = appState.registeredProducts.contains(where: { $0.id == product.id })
             withAnimation(.spring(response: 0.9, dampingFraction: 0.8).delay(0.15)) {
                 riskBarAnimated = CGFloat(adjustedRiskLevel.rawValue) / 5.0
+            }
+            Task {
+                airQuality = await AirKoreaAPIService.shared.fetchAirQuality()
             }
         }
     }
@@ -273,6 +277,26 @@ struct DiagnosisResultView: View {
                     }
                     .padding(14)
                     .cardStyle()
+                }
+
+                // 에어코리아 대기질 (Tier 2.2)
+                if let aq = airQuality {
+                    HStack(spacing: 10) {
+                        Image(systemName: aq.isGoodForVentilation ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
+                            .font(.system(size: 14))
+                            .foregroundStyle(aq.isGoodForVentilation ? Color.brandGreen : Color.riskMedium)
+                        Text(aq.ventilationMessage)
+                            .font(.system(size: 12))
+                            .foregroundStyle(Color.textSecondary)
+                            .fixedSize(horizontal: false, vertical: true)
+                        Spacer()
+                        Text("에어코리아")
+                            .font(.system(size: 10, weight: .medium))
+                            .foregroundStyle(Color.textTertiary)
+                    }
+                    .padding(12)
+                    .background(aq.isGoodForVentilation ? Color.greenMist : Color.butterMist)
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                 }
             }
         }

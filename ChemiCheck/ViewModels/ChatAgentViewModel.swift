@@ -16,21 +16,24 @@ final class ChatAgentViewModel {
         QuickPrompt(text: "더 안전한 대체품 알려줘", icon: "arrow.triangle.2.circlepath")
     ]
 
-    func send(_ text: String) async {
+    func send(_ text: String, familyProfile: FamilyProfile = FamilyProfile()) async {
         guard !text.trimmingCharacters(in: .whitespaces).isEmpty else { return }
         let userMsg = ChatMessage(role: .user, content: text)
         messages.append(userMsg)
         inputText = ""
 
         isTyping = true
-        let typingMsg = ChatMessage(role: .assistant, content: "", isTyping: true)
-        messages.append(typingMsg)
+        messages.append(ChatMessage(role: .assistant, content: "", isTyping: true))
 
-        try? await Task.sleep(nanoseconds: 1_500_000_000)
+        // Claude API 실호출 (폴백 캐시 포함)
+        let result = await AIAgentService.shared.ask(
+            question: text,
+            product: currentProduct,
+            familyProfile: familyProfile
+        )
 
         messages.removeLast()
-        let response = generateDummyResponse(for: text)
-        messages.append(response)
+        messages.append(ChatMessage(role: .assistant, content: result.content, sources: result.sources))
         isTyping = false
     }
 

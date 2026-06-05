@@ -1,21 +1,40 @@
 import SwiftUI
 import AVFoundation
+import PhotosUI
 
 struct CameraView: View {
     @Environment(\.dismiss) private var dismiss
-    @State private var isAnalyzing = false
-    @State private var showProductPicker = false
-    @State private var flashOn = false
 
-    var onCapture: (Product) -> Void
+    /// 실 라벨 사진 캡처 완료 콜백
+    var onCapture: (UIImage) -> Void
+    /// 데모 모드: 목록에서 제품 직접 선택
+    var onDemoSelect: (Product) -> Void
+
+    @State private var isCapturing = false
+    @State private var flashOn = false
+    @State private var showDemoPicker = false
+    @State private var selectedPhotoItem: PhotosPickerItem? = nil
+    @State private var cameraCoordinator = CameraCoordinator()
 
     var body: some View {
         ZStack {
-            // Camera background
-            CameraPreviewRepresentable()
+            CameraPreviewRepresentable(coordinator: cameraCoordinator)
                 .ignoresSafeArea()
 
-            // Overlay
+            // 어두운 마스크 (가이드 프레임 외곽)
+            Color.black.opacity(0.35)
+                .ignoresSafeArea()
+                .mask(
+                    Rectangle()
+                        .fill(.black)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 16, style: .continuous)
+                                .frame(width: 300, height: 200)
+                                .blendMode(.destinationOut)
+                        )
+                        .compositingGroup()
+                )
+
             VStack(spacing: 0) {
                 topBar
                 Spacer()
@@ -24,24 +43,34 @@ struct CameraView: View {
                 bottomControls
             }
 
-            if isAnalyzing {
+            if isCapturing {
                 analyzingOverlay
             }
         }
         .preferredColorScheme(.dark)
-        .sheet(isPresented: $showProductPicker) {
-            DemoProductPickerView { product in
-                showProductPicker = false
-                analyze(product: product)
+        .sheet(isPresented: $showDemoPicker) {
+            DemoProductPickerView(onSelect: { product in
+                showDemoPicker = false
+                onDemoSelect(product)
+            })
+        }
+        .onChange(of: selectedPhotoItem) { _, item in
+            guard let item else { return }
+            Task {
+                if let data = try? await item.loadTransferable(type: Data.self),
+                   let image = UIImage(data: data) {
+                    await MainActor.run { isCapturing = true }
+                    onCapture(image)
+                }
             }
         }
     }
 
+    // MARK: - Top Bar
+
     private var topBar: some View {
         HStack {
-            Button {
-                dismiss()
-            } label: {
+            Button { dismiss() } label: {
                 Image(systemName: "xmark")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundStyle(.white)
@@ -58,9 +87,7 @@ struct CameraView: View {
 
             Spacer()
 
-            Button {
-                flashOn.toggle()
-            } label: {
+            Button { flashOn.toggle(); cameraCoordinator.toggleFlash(flashOn) } label: {
                 Image(systemName: flashOn ? "bolt.fill" : "bolt.slash.fill")
                     .font(.system(size: 18, weight: .semibold))
                     .foregroundStyle(flashOn ? Color.yellow : .white)
@@ -73,102 +100,89 @@ struct CameraView: View {
         .padding(.top, 16)
     }
 
+    // MARK: - Guide Frame
+
     private var guideFrame: some View {
         VStack(spacing: 16) {
             ZStack {
-                // Dim overlay
-                RoundedRectangle(cornerRadius: 20, style: .continuous)
-                    .stroke(Color.white.opacity(0.8), lineWidth: 2)
+                RoundedRectangle(cornerRadius: 16, style: .continuous)
+                    .stroke(Color.white.opacity(0.6), lineWidth: 1)
                     .frame(width: 300, height: 200)
 
-                // Corner markers
                 CornerBrackets()
                     .frame(width: 300, height: 200)
 
-                // Guide text inside frame
                 VStack(spacing: 6) {
                     Image(systemName: "doc.text.viewfinder")
                         .font(.system(size: 28))
-                        .foregroundStyle(.white.opacity(0.7))
+                        .foregroundStyle(.white.opacity(0.6))
                     Text("제품 라벨을 프레임 안에\n맞춰주세요")
                         .font(.system(size: 13))
-                        .foregroundStyle(.white.opacity(0.7))
+                        .foregroundStyle(.white.opacity(0.6))
                         .multilineTextAlignment(.center)
                 }
             }
 
-            Text("라벨 전체가 보이도록 충분히 거리를 두세요")
-                .font(.system(size: 13))
-                .foregroundStyle(.white.opacity(0.8))
+            Text("성분표가 보이도록 충분히 거리를 두세요")
+                .font(.system(size: 12))
+                .foregroundStyle(.white.opacity(0.7))
         }
     }
 
+    // MARK: - Bottom Controls
+
     private var bottomControls: some View {
-        VStack(spacing: 24) {
-            HStack(spacing: 0) {
-                Spacer()
-
-                // Demo product picker
-                Button {
-                    showProductPicker = true
-                } label: {
-                    VStack(spacing: 6) {
-                        Image(systemName: "photo.on.rectangle")
-                            .font(.system(size: 22))
-                            .foregroundStyle(.white)
-                        Text("앨범")
-                            .font(.system(size: 11))
-                            .foregroundStyle(.white.opacity(0.8))
-                    }
-                    .frame(width: 60)
+        HStack(spacing: 0) {
+            // 갤러리 (PhotosPicker)
+            PhotosPicker(selection: $selectedPhotoItem, matching: .images) {
+                VStack(spacing: 6) {
+                    Image(systemName: "photo.on.rectangle")
+                        .font(.system(size: 22))
+                        .foregroundStyle(.white)
+                    Text("갤러리")
+                        .font(.system(size: 11))
+                        .foregroundStyle(.white.opacity(0.8))
                 }
+                .frame(width: 70)
+            }
 
-                Spacer()
+            Spacer()
 
-                // Shutter button
-                Button {
-                    capturePhoto()
-                } label: {
-                    ZStack {
-                        Circle()
-                            .fill(.white)
-                            .frame(width: 72, height: 72)
-                        Circle()
-                            .fill(Color.brandNavy)
-                            .frame(width: 60, height: 60)
-                        Image(systemName: "camera.fill")
-                            .font(.system(size: 24))
-                            .foregroundStyle(.white)
-                    }
+            // 셔터
+            Button { capturePhoto() } label: {
+                ZStack {
+                    Circle().fill(.white).frame(width: 72, height: 72)
+                    Circle().fill(Color.brandNavy).frame(width: 60, height: 60)
+                    Image(systemName: "camera.fill")
+                        .font(.system(size: 24))
+                        .foregroundStyle(.white)
                 }
+            }
 
-                Spacer()
+            Spacer()
 
-                // Demo: select product manually
-                Button {
-                    showProductPicker = true
-                } label: {
-                    VStack(spacing: 6) {
-                        Image(systemName: "list.bullet")
-                            .font(.system(size: 22))
-                            .foregroundStyle(.white)
-                        Text("데모")
-                            .font(.system(size: 11))
-                            .foregroundStyle(.white.opacity(0.8))
-                    }
-                    .frame(width: 60)
+            // 데모 모드
+            Button { showDemoPicker = true } label: {
+                VStack(spacing: 6) {
+                    Image(systemName: "list.bullet")
+                        .font(.system(size: 22))
+                        .foregroundStyle(.white)
+                    Text("데모")
+                        .font(.system(size: 11))
+                        .foregroundStyle(.white.opacity(0.8))
                 }
-
-                Spacer()
+                .frame(width: 70)
             }
         }
+        .padding(.horizontal, 32)
         .padding(.bottom, 48)
     }
 
+    // MARK: - Analyzing Overlay
+
     private var analyzingOverlay: some View {
         ZStack {
-            Color.black.opacity(0.7).ignoresSafeArea()
-
+            Color.black.opacity(0.75).ignoresSafeArea()
             VStack(spacing: 20) {
                 ZStack {
                     Circle()
@@ -179,68 +193,115 @@ struct CameraView: View {
                         .stroke(Color.brandGreen, style: StrokeStyle(lineWidth: 4, lineCap: .round))
                         .frame(width: 80, height: 80)
                         .rotationEffect(.degrees(-90))
-                        .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: isAnalyzing)
+                        .animation(.linear(duration: 1).repeatForever(autoreverses: false), value: isCapturing)
                 }
-
-                VStack(spacing: 8) {
-                    Text("라벨 분석 중...")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(.white)
-                    Text("화학물질 데이터베이스와 비교하고 있어요")
-                        .font(.system(size: 13))
-                        .foregroundStyle(.white.opacity(0.7))
-                }
+                Text("라벨 전달 중...")
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundStyle(.white)
             }
         }
     }
 
-    private func capturePhoto() {
-        // 1단계: 더미 제품으로 처리
-        showProductPicker = true
-    }
+    // MARK: - 셔터 캡처
 
-    private func analyze(product: Product) {
-        isAnalyzing = true
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.8) {
-            isAnalyzing = false
-            onCapture(product)
+    private func capturePhoto() {
+        isCapturing = true
+        cameraCoordinator.capturePhoto { image in
+            DispatchQueue.main.async {
+                if let img = image {
+                    onCapture(img)
+                } else {
+                    // 실기기 캡처 실패 시 데모 피커로 폴백
+                    isCapturing = false
+                    showDemoPicker = true
+                }
+            }
         }
     }
 }
 
-// MARK: - Camera Preview
+// MARK: - Camera Coordinator (실기기 캡처 관리)
 
-struct CameraPreviewRepresentable: UIViewRepresentable {
-    func makeUIView(context: Context) -> UIView {
-        let view = UIView()
-        view.backgroundColor = .black
+@Observable
+final class CameraCoordinator: NSObject {
+    private var session: AVCaptureSession?
+    private var photoOutput: AVCapturePhotoOutput?
+    private var captureCompletion: ((UIImage?) -> Void)?
 
-        guard let device = AVCaptureDevice.default(for: .video),
-              let input = try? AVCaptureDeviceInput(device: device) else { return view }
-
+    func setup(for view: UIView) {
         let session = AVCaptureSession()
-        if session.canAddInput(input) { session.addInput(input) }
+        session.sessionPreset = .photo
+
+        guard let device = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back),
+              let input = try? AVCaptureDeviceInput(device: device),
+              session.canAddInput(input) else { return }
+
+        session.addInput(input)
+
+        let output = AVCapturePhotoOutput()
+        guard session.canAddOutput(output) else { return }
+        session.addOutput(output)
+
+        self.session = session
+        self.photoOutput = output
 
         let previewLayer = AVCaptureVideoPreviewLayer(session: session)
         previewLayer.videoGravity = .resizeAspectFill
+        previewLayer.frame = view.bounds
         view.layer.addSublayer(previewLayer)
 
         DispatchQueue.global(qos: .userInitiated).async {
             session.startRunning()
         }
+    }
 
-        DispatchQueue.main.async {
-            previewLayer.frame = view.bounds
+    func capturePhoto(completion: @escaping (UIImage?) -> Void) {
+        guard let output = photoOutput else {
+            completion(nil)
+            return
         }
+        captureCompletion = completion
+        let settings = AVCapturePhotoSettings()
+        output.capturePhoto(with: settings, delegate: self)
+    }
 
+    func toggleFlash(_ on: Bool) {
+        guard let device = AVCaptureDevice.default(for: .video),
+              device.hasTorch else { return }
+        try? device.lockForConfiguration()
+        device.torchMode = on ? .on : .off
+        device.unlockForConfiguration()
+    }
+}
+
+extension CameraCoordinator: AVCapturePhotoCaptureDelegate {
+    func photoOutput(_ output: AVCapturePhotoOutput,
+                     didFinishProcessingPhoto photo: AVCapturePhoto,
+                     error: Error?) {
+        let image: UIImage?
+        if let data = photo.fileDataRepresentation() {
+            image = UIImage(data: data)
+        } else {
+            image = nil
+        }
+        captureCompletion?(image)
+        captureCompletion = nil
+    }
+}
+
+// MARK: - Camera Preview (UIKit 래핑)
+
+struct CameraPreviewRepresentable: UIViewRepresentable {
+    let coordinator: CameraCoordinator
+
+    func makeUIView(context: Context) -> UIView {
+        let view = UIView()
+        view.backgroundColor = .black
+        coordinator.setup(for: view)
         return view
     }
 
-    func updateUIView(_ uiView: UIView, context: Context) {
-        if let layer = uiView.layer.sublayers?.first as? AVCaptureVideoPreviewLayer {
-            layer.frame = uiView.bounds
-        }
-    }
+    func updateUIView(_ uiView: UIView, context: Context) {}
 }
 
 // MARK: - Corner Brackets
@@ -248,39 +309,18 @@ struct CameraPreviewRepresentable: UIViewRepresentable {
 struct CornerBrackets: View {
     var body: some View {
         GeometryReader { geo in
-            let w = geo.size.width
-            let h = geo.size.height
-            let len: CGFloat = 24
-            let t: CGFloat = 3
+            let w = geo.size.width, h = geo.size.height
+            let len: CGFloat = 22, t: CGFloat = 3
 
             ZStack {
-                // Top-left
-                Path { p in
-                    p.move(to: CGPoint(x: 0, y: len))
-                    p.addLine(to: CGPoint(x: 0, y: 0))
-                    p.addLine(to: CGPoint(x: len, y: 0))
-                }.stroke(Color.brandGreen, style: StrokeStyle(lineWidth: t, lineCap: .round))
-
-                // Top-right
-                Path { p in
-                    p.move(to: CGPoint(x: w - len, y: 0))
-                    p.addLine(to: CGPoint(x: w, y: 0))
-                    p.addLine(to: CGPoint(x: w, y: len))
-                }.stroke(Color.brandGreen, style: StrokeStyle(lineWidth: t, lineCap: .round))
-
-                // Bottom-left
-                Path { p in
-                    p.move(to: CGPoint(x: 0, y: h - len))
-                    p.addLine(to: CGPoint(x: 0, y: h))
-                    p.addLine(to: CGPoint(x: len, y: h))
-                }.stroke(Color.brandGreen, style: StrokeStyle(lineWidth: t, lineCap: .round))
-
-                // Bottom-right
-                Path { p in
-                    p.move(to: CGPoint(x: w - len, y: h))
-                    p.addLine(to: CGPoint(x: w, y: h))
-                    p.addLine(to: CGPoint(x: w, y: h - len))
-                }.stroke(Color.brandGreen, style: StrokeStyle(lineWidth: t, lineCap: .round))
+                Path { p in p.move(to: .init(x:0,y:len)); p.addLine(to: .init(x:0,y:0)); p.addLine(to: .init(x:len,y:0)) }
+                    .stroke(Color.brandGreen, style: StrokeStyle(lineWidth: t, lineCap: .round))
+                Path { p in p.move(to: .init(x:w-len,y:0)); p.addLine(to: .init(x:w,y:0)); p.addLine(to: .init(x:w,y:len)) }
+                    .stroke(Color.brandGreen, style: StrokeStyle(lineWidth: t, lineCap: .round))
+                Path { p in p.move(to: .init(x:0,y:h-len)); p.addLine(to: .init(x:0,y:h)); p.addLine(to: .init(x:len,y:h)) }
+                    .stroke(Color.brandGreen, style: StrokeStyle(lineWidth: t, lineCap: .round))
+                Path { p in p.move(to: .init(x:w-len,y:h)); p.addLine(to: .init(x:w,y:h)); p.addLine(to: .init(x:w,y:h-len)) }
+                    .stroke(Color.brandGreen, style: StrokeStyle(lineWidth: t, lineCap: .round))
             }
         }
     }
@@ -297,6 +337,7 @@ struct DemoProductPickerView: View {
             List(DummyDataLoader.shared.products) { product in
                 Button {
                     onSelect(product)
+                    dismiss()
                 } label: {
                     HStack(spacing: 12) {
                         ZStack {
@@ -332,5 +373,5 @@ struct DemoProductPickerView: View {
 }
 
 #Preview {
-    CameraView(onCapture: { _ in })
+    CameraView(onCapture: { _ in }, onDemoSelect: { _ in })
 }

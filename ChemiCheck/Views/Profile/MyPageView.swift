@@ -3,6 +3,8 @@ import SwiftUI
 struct MyPageView: View {
     @Environment(AppState.self) private var appState
     @State private var showProfileEdit = false
+    @State private var titleTapCount = 0
+    @State private var showDemoPanel = false
 
     var body: some View {
         NavigationStack {
@@ -33,9 +35,26 @@ struct MyPageView: View {
             .background(Color.bgPrimary)
             .navigationTitle("마이페이지")
             .navigationBarTitleDisplayMode(.large)
+            // 숨김 제스처: 네비게이션 타이틀 영역 3번 탭 → 데모 패널
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    Text("마이페이지")
+                        .font(.system(size: 17, weight: .semibold))
+                        .onTapGesture {
+                            titleTapCount += 1
+                            if titleTapCount >= 3 {
+                                titleTapCount = 0
+                                showDemoPanel = true
+                            }
+                        }
+                }
+            }
         }
         .sheet(isPresented: $showProfileEdit) {
             ProfileEditView()
+        }
+        .sheet(isPresented: $showDemoPanel) {
+            DemoModePanel()
         }
     }
 
@@ -194,6 +213,86 @@ struct MyPageView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(16)
+    }
+}
+
+// MARK: - 데모 모드 패널
+
+struct DemoModePanel: View {
+    @Environment(\.dismiss) private var dismiss
+    @State private var isDemoOn = DemoModeManager.shared.isOn
+
+    var body: some View {
+        NavigationStack {
+            List {
+                Section {
+                    Toggle(isOn: $isDemoOn) {
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text("데모 모드")
+                                .font(.system(size: 15, weight: .semibold))
+                            Text("카메라 캡처 → 시나리오 제품 자동 선택\nClaude API → 사전 캐시 응답")
+                                .font(.system(size: 12))
+                                .foregroundStyle(Color.textSecondary)
+                        }
+                    }
+                    .onChange(of: isDemoOn) { _, v in DemoModeManager.shared.isOn = v }
+                } header: {
+                    Text("시연 설정")
+                } footer: {
+                    Text("심사위원이 직접 조작 시 OFF로 전환하세요.")
+                        .font(.system(size: 11))
+                }
+
+                Section("고정값 (데모 모드 ON 시)") {
+                    demoRow(icon: "wind", color: .brandGreen, label: "에어코리아", value: "PM2.5 보통 · 환기 30분")
+                    demoRow(icon: "exclamationmark.triangle.fill", color: .riskCritical, label: "회수 알림", value: "자동 트리거")
+                    demoRow(icon: "sparkles", color: .brandNavy, label: "AI 상담", value: "사전 캐시 응답")
+                }
+
+                Section {
+                    Button(role: .destructive) {
+                        DemoModeManager.shared.isOn = false
+                        isDemoOn = false
+                    } label: {
+                        Text("데모 모드 OFF로 초기화")
+                            .font(.system(size: 15))
+                    }
+                }
+            }
+            .navigationTitle("개발자 설정")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("닫기") { dismiss() }
+                }
+            }
+        }
+    }
+
+    private func demoRow(icon: String, color: Color, label: String, value: String) -> some View {
+        HStack {
+            Image(systemName: icon)
+                .foregroundStyle(color)
+                .frame(width: 22)
+            Text(label)
+                .font(.system(size: 14))
+            Spacer()
+            Text(value)
+                .font(.system(size: 13))
+                .foregroundStyle(Color.textSecondary)
+        }
+    }
+}
+
+// MARK: - 데모 모드 매니저
+
+final class DemoModeManager {
+    static let shared = DemoModeManager()
+    private init() {}
+
+    var isOn: Bool {
+        get { UserDefaults.standard.bool(forKey: "demoMode") }
+        set { UserDefaults.standard.set(newValue, forKey: "demoMode") }
     }
 }
 

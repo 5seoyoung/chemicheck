@@ -38,14 +38,25 @@ struct ContentView: View {
             }
         }
         .sheet(isPresented: $showCamera) {
-            CameraView { product in
-                diagnosisVM.loadProduct(product, for: appState.familyProfile)
-                appState.addRecentProduct(product)
-                showCamera = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                    showDiagnosis = true
+            CameraView(
+                onCapture: { image in
+                    showCamera = false
+                    Task {
+                        await diagnosisVM.analyzeImage(image, for: appState.familyProfile)
+                        await MainActor.run {
+                            showDiagnosis = true
+                        }
+                    }
+                },
+                onDemoSelect: { product in
+                    diagnosisVM.loadProduct(product, for: appState.familyProfile)
+                    appState.addRecentProduct(product)
+                    showCamera = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
+                        showDiagnosis = true
+                    }
                 }
-            }
+            )
         }
         .sheet(isPresented: $showDiagnosis) {
             if let product = diagnosisVM.currentProduct {
@@ -55,8 +66,71 @@ struct ContentView: View {
                     familyWarnings: diagnosisVM.familyWarnings,
                     alternatives: diagnosisVM.alternatives
                 )
+            } else if diagnosisVM.isAnalyzing {
+                AnalyzingView(step: diagnosisVM.analysisStep)
             }
         }
+    }
+}
+
+// MARK: - 분석 진행 뷰
+
+struct AnalyzingView: View {
+    let step: AnalysisStep
+    @State private var rotation: Double = 0
+
+    var body: some View {
+        ZStack {
+            Color.bgPrimary.ignoresSafeArea()
+            VStack(spacing: 28) {
+                ZStack {
+                    Circle()
+                        .stroke(Color.greenSoft, lineWidth: 5)
+                        .frame(width: 88, height: 88)
+                    Circle()
+                        .trim(from: 0, to: 0.72)
+                        .stroke(
+                            LinearGradient(colors: [Color.brandGreen, Color.greenDeep],
+                                           startPoint: .topLeading, endPoint: .bottomTrailing),
+                            style: StrokeStyle(lineWidth: 5, lineCap: .round)
+                        )
+                        .frame(width: 88, height: 88)
+                        .rotationEffect(.degrees(rotation))
+                        .onAppear {
+                            withAnimation(.linear(duration: 1.1).repeatForever(autoreverses: false)) {
+                                rotation = 360
+                            }
+                        }
+                    Image(systemName: "doc.text.viewfinder")
+                        .font(.system(size: 28))
+                        .foregroundStyle(Color.brandNavy)
+                }
+                VStack(spacing: 8) {
+                    Text(step.rawValue.isEmpty ? "분석 준비 중..." : step.rawValue)
+                        .font(.system(size: 18, weight: .semibold))
+                        .foregroundStyle(Color.textPrimary)
+                    Text("식약처·환경부 데이터와 비교 중이에요")
+                        .font(.system(size: 13))
+                        .foregroundStyle(Color.textSecondary)
+                }
+                HStack(spacing: 8) {
+                    ForEach([AnalysisStep.ocr, .matching, .calculating], id: \.rawValue) { s in
+                        Capsule()
+                            .fill(stepActive(s) ? Color.brandGreen : Color.separator)
+                            .frame(height: 4)
+                    }
+                }
+                .frame(width: 120)
+            }
+            .padding(40)
+        }
+    }
+
+    private func stepActive(_ s: AnalysisStep) -> Bool {
+        let order: [AnalysisStep] = [.ocr, .matching, .calculating]
+        let ci = order.firstIndex(of: step) ?? 0
+        let si = order.firstIndex(of: s) ?? 0
+        return si <= ci
     }
 }
 

@@ -1,0 +1,112 @@
+[
+  {
+    "recallId": "RC_2025_001",
+    "productName": "청솔 방향제 라벤더",
+    "manufacturer": "청솔케미칼",
+    "reportNumber": "2025-환경-00123",
+    "violationType": "기준치 초과 — CMIT/MIT 허용 농도(15ppm) 초과 검출",
+    "recallDate": "2025-08-12",
+    "refundContact": "1588-0001 / 구매처 영수증 없이 전액 환불",
+    "description": "환경부 생활화학제품 안전기준 위반. CMIT/MIT 함량이 허용 기준(15ppm)의 3.2배 초과 검출. 즉시 사용 중단 및 반품 권고.",
+    "keywords": ["방향제", "라벤더", "청솔", "CMIT", "MIT"]
+  },
+  {
+    "recallId": "RC_2025_002",
+    "productName": "에코클린 욕실곰팡이 제거제",
+    "manufacturer": "에코클린코리아",
+    "reportNumber": "2025-환경-00456",
+    "violationType": "미신고 성분 함유 — 벤잘코늄클로라이드 미표기",
+    "recallDate": "2025-09-03",
+    "refundContact": "1577-0002 / 제조사 직접 수거 신청",
+    "description": "안전확인 신고 성분 외 벤잘코늄클로라이드 미표기 검출. 알레르기 보유자 및 영유아 노출 위험.",
+    "keywords": ["욕실", "곰팡이", "에코클린", "벤잘코늄", "세정제"]
+  },
+  {
+    "recallId": "RC_2025_003",
+    "productName": "프레시홈 세탁세제 드럼용",
+    "manufacturer": "프레시홈",
+    "reportNumber": "2025-식약처-00789",
+    "violationType": "형광증백제 기준 초과",
+    "recallDate": "2025-10-17",
+    "refundContact": "고객센터 080-000-0003 / 온라인몰 반품 처리",
+    "description": "영유아 의류 세탁 시 형광증백제 잔류 위험. 식약처 어린이제품 안전 기준 초과.",
+    "keywords": ["세탁세제", "드럼", "형광증백제", "프레시홈"]
+  },
+  {
+    "recallId": "RC_2025_004",
+    "productName": "그린가드 살균 스프레이 멀티",
+    "manufacturer": "그린가드",
+    "reportNumber": "2025-환경-01012",
+    "violationType": "차아염소산나트륨 농도 기준(4%) 초과",
+    "recallDate": "2025-11-05",
+    "refundContact": "1644-0004 / 전국 대형마트 서비스데스크",
+    "description": "차아염소산나트륨 농도 7.8% 검출 (허용 4% 초과). 피부·호흡기 화학 손상 위험.",
+    "keywords": ["살균", "스프레이", "그린가드", "차아염소산", "다목적"]
+  },
+  {
+    "recallId": "RC_2025_005",
+    "productName": "아이클린 베이비 물티슈",
+    "manufacturer": "아이클린",
+    "reportNumber": "2025-식약처-01345",
+    "violationType": "MIT 0.0015% 초과 — 영유아 제품 사용 금지 성분",
+    "recallDate": "2025-12-01",
+    "refundContact": "080-000-0005 / 온라인 신청 후 택배 수거",
+    "description": "영유아용 물티슈에서 MIT 검출. 영유아 제품에 사용 금지된 보존제 함유. 즉시 사용 중단.",
+    "keywords": ["물티슈", "아기", "베이비", "아이클린", "MIT", "영유아"]
+  },
+  {
+    "recallId": "RC_2026_001",
+    "productName": "홈케어 주방세제 레몬향",
+    "manufacturer": "홈케어",
+    "reportNumber": "2026-식약처-00021",
+    "violationType": "표시 기준 위반 — 알레르기 유발 향료 미표기",
+    "recallDate": "2026-01-15",
+    "refundContact": "1800-0006 / 구매처 반품",
+    "description": "알레르기 유발 가능 향료(시트랄, 리모넨) 미표기. 알레르기 보유자 피해 우려.",
+    "keywords": ["주방세제", "레몬", "홈케어", "향료", "알레르기"]
+  },
+  {
+    "recallId": "RC_2026_002",
+    "productName": "퓨어바이오 세탁세제 아기옷용",
+    "manufacturer": "퓨어바이오",
+    "reportNumber": "2026-환경-00089",
+    "violationType": "파라벤 계열 방부제 기준 초과",
+    "recallDate": "2026-02-08",
+    "refundContact": "고객센터 070-0000-0007",
+    "description": "영유아 세탁세제에서 부틸파라벤 기준치 초과 검출. 내분비 교란 우려.",
+    "keywords": ["세탁세제", "아기", "영유아", "퓨어바이오", "파라벤"]
+  },
+  {
+    "recallId": "RC_2026_003",
+    "productName": "네이처클린 다목적 세정제",
+    "manufacturer": "네이처클린",
+    "reportNumber": "2026-환경-00234",
+    "violationType": "트리클로산 함유 — 2024년부터 생활화학제품 사용 금지",
+    "recallDate": "2026-03-20",
+    "refundContact": "전국 판매점 교환 또는 환불",
+    "description": "2024년 환경부 고시로 생활화학제품 내 트리클로산 사용 전면 금지. 기준 시행 후에도 유통 중인 제품 회수.",
+    "keywords": ["다목적", "세정제", "네이처클린", "트리클로산"]
+  },
+  {
+    "recallId": "RC_2026_004",
+    "productName": "프레쉬에어 탈취스프레이 패브릭",
+    "manufacturer": "프레쉬에어",
+    "reportNumber": "2026-환경-00378",
+    "violationType": "이산화염소 농도 기준 초과",
+    "recallDate": "2026-04-11",
+    "refundContact": "1599-0008 / 온라인 접수 후 방문 수거",
+    "description": "이산화염소 함량 허용치(0.01%) 초과 검출. 흡입 시 기도 손상 위험.",
+    "keywords": ["탈취", "스프레이", "패브릭", "프레쉬에어", "이산화염소"]
+  },
+  {
+    "recallId": "RC_2026_005",
+    "productName": "클린플러스 살충제 모기향",
+    "manufacturer": "클린플러스",
+    "reportNumber": "2026-환경-00512",
+    "violationType": "살생물제 허가 성분 초과 — 피레스린 농도 기준 위반",
+    "recallDate": "2026-05-02",
+    "refundContact": "080-000-0009 / 구매처 반품 가능",
+    "description": "피레스린 농도 허용 기준(0.2%) 초과. 영유아·반려동물 신경독성 위험. 즉시 사용 중단.",
+    "keywords": ["살충제", "모기향", "클린플러스", "피레스린", "살생물제"]
+  }
+]
