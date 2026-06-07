@@ -7,6 +7,7 @@ struct MyProductsView: View {
     @State private var selectedRecall: RecallNotification? = nil
     @State private var showDemoAlert = false
     @State private var pulsing = false
+    @State private var showProductCatalog = false
 
     var body: some View {
         NavigationStack {
@@ -37,10 +38,29 @@ struct MyProductsView: View {
                     }
                 }
             }
-            .background(Color.bgPrimary)
+            .background(Color(hex: "#F3FAF5"))
             .navigationTitle("내 제품")
             .navigationBarTitleDisplayMode(.large)
             .searchable(text: $vm.searchText, prompt: "제품명, 브랜드 검색")
+            .toolbar {
+                ToolbarItem(placement: .primaryAction) {
+                    Button { showProductCatalog = true } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "plus.circle.fill")
+                                .foregroundStyle(Color.brandGreen)
+                            Text("제품 추가")
+                                .font(.system(size: 14, weight: .semibold))
+                                .foregroundStyle(Color.brandGreen)
+                        }
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $showProductCatalog) {
+            ProductCatalogSheet { product in
+                appState.registerProduct(product)
+                showProductCatalog = false
+            }
         }
         .sheet(item: $selectedProduct) { product in
             DiagnosisResultView(
@@ -111,26 +131,34 @@ struct MyProductsView: View {
     }
 
     private var emptyState: some View {
-        VStack(spacing: 20) {
-            Spacer().frame(height: 60)
+        VStack(spacing: 24) {
+            Spacer().frame(height: 48)
 
             ZStack {
-                Circle()
-                    .fill(Color.bgSecondary)
-                    .frame(width: 100, height: 100)
+                Circle().fill(Color.greenSoft).frame(width: 100, height: 100)
                 Image(systemName: "shippingbox")
-                    .font(.system(size: 44))
-                    .foregroundStyle(Color.textTertiary)
+                    .font(.system(size: 44)).foregroundStyle(Color.brandGreen)
             }
 
             VStack(spacing: 8) {
                 Text("등록된 제품이 없어요")
-                    .font(.system(size: 18, weight: .semibold))
-                    .foregroundStyle(Color.textPrimary)
-                Text("진단 결과 화면에서 제품을 등록하면\n회수 고시 발생 시 즉시 알려드려요")
-                    .font(.system(size: 14))
-                    .foregroundStyle(Color.textSecondary)
+                    .font(.system(size: 18, weight: .semibold)).foregroundStyle(Color.textPrimary)
+                Text("제품을 등록하면 회수 고시 발생 시\n즉시 알려드려요")
+                    .font(.system(size: 14)).foregroundStyle(Color.textSecondary)
                     .multilineTextAlignment(.center)
+            }
+
+            Button { showProductCatalog = true } label: {
+                HStack(spacing: 8) {
+                    Image(systemName: "plus.circle.fill")
+                    Text("제품 찾아서 등록하기")
+                        .font(.system(size: 15, weight: .semibold))
+                }
+                .foregroundStyle(.white)
+                .padding(.vertical, 14).padding(.horizontal, 28)
+                .background(Color.brandGreen)
+                .clipShape(Capsule())
+                .shadow(color: Color.brandGreen.opacity(0.4), radius: 8, x: 0, y: 4)
             }
         }
         .frame(maxWidth: .infinity)
@@ -202,6 +230,82 @@ struct MyProductsView: View {
             )
             .padding(.horizontal, 20)
             .padding(.top, 16)
+        }
+    }
+}
+
+// MARK: - 제품 카탈로그 시트
+
+struct ProductCatalogSheet: View {
+    @Environment(AppState.self) private var appState
+    @Environment(\.dismiss) private var dismiss
+    @State private var searchText = ""
+    var onRegister: (Product) -> Void
+
+    private var filtered: [Product] {
+        let all = DummyDataLoader.shared.products
+        if searchText.isEmpty { return all }
+        return all.filter {
+            $0.name.localizedCaseInsensitiveContains(searchText) ||
+            $0.brand.localizedCaseInsensitiveContains(searchText) ||
+            $0.category.rawValue.localizedCaseInsensitiveContains(searchText)
+        }
+    }
+
+    var body: some View {
+        NavigationStack {
+            List(filtered) { product in
+                let isRegistered = appState.registeredProducts.contains(where: { $0.id == product.id })
+                Button {
+                    if !isRegistered { onRegister(product) }
+                } label: {
+                    HStack(spacing: 12) {
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 10, style: .continuous)
+                                .fill(product.riskLevel.backgroundColor)
+                                .frame(width: 44, height: 44)
+                            Image(systemName: product.imageSystemName)
+                                .font(.system(size: 20))
+                                .foregroundStyle(product.riskLevel.color)
+                        }
+
+                        VStack(alignment: .leading, spacing: 3) {
+                            Text(product.name)
+                                .font(.system(size: 15, weight: .semibold))
+                                .foregroundStyle(Color.textPrimary)
+                            HStack(spacing: 4) {
+                                Text(product.brand)
+                                    .font(.system(size: 12)).foregroundStyle(Color.textSecondary)
+                                Text("·").foregroundStyle(Color.textTertiary)
+                                Text(product.category.rawValue)
+                                    .font(.system(size: 12)).foregroundStyle(Color.textTertiary)
+                            }
+                        }
+
+                        Spacer()
+
+                        if isRegistered {
+                            Label("등록됨", systemImage: "checkmark.circle.fill")
+                                .font(.system(size: 11, weight: .semibold))
+                                .foregroundStyle(Color.brandGreen)
+                        } else {
+                            RiskBadge(level: product.riskLevel, size: .small)
+                        }
+                    }
+                    .padding(.vertical, 4)
+                    .opacity(isRegistered ? 0.5 : 1)
+                }
+                .buttonStyle(.plain)
+                .disabled(isRegistered)
+            }
+            .searchable(text: $searchText, prompt: "제품명, 브랜드, 카테고리")
+            .navigationTitle("제품 찾아서 등록")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("닫기") { dismiss() }
+                }
+            }
         }
     }
 }

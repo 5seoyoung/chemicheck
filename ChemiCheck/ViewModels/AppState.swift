@@ -18,6 +18,7 @@ final class AppState {
         didSet { UNUserNotificationCenter.current().setBadgeCount(notificationBadgeCount) }
     }
     var pendingRecall: RecallNotification? = nil
+    var selectedTab: Int = 0
 
     init() {
         self.hasCompletedOnboarding = UserDefaults.standard.bool(forKey: "hasCompletedOnboarding")

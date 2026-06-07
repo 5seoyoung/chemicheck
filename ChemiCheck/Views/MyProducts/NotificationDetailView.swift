@@ -189,8 +189,7 @@ struct NotificationDetailView: View {
     private var ctaButtons: some View {
         VStack(spacing: 10) {
             Button {
-                // refundContact에서 전화번호 추출
-                let phoneNumber = extractPhoneNumber(from: notification.refundContact)
+                let phoneNumber = extractPhoneNumber(from: notification.refundGuide)
                 if let url = URL(string: "tel://\(phoneNumber)") {
                     UIApplication.shared.open(url)
                 }
@@ -205,8 +204,6 @@ struct NotificationDetailView: View {
     }
 
     private func extractPhoneNumber(from text: String) -> String {
-        let digits = text.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
-        // 1588-xxxx, 080-xxx 등 앞부분만 추출
         let components = text.components(separatedBy: " / ")
         let first = components.first ?? text
         return first.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()

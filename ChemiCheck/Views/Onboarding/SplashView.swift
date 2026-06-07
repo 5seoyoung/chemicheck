@@ -6,8 +6,6 @@ struct SplashView: View {
     @State private var textOpacity: CGFloat = 0
     @State private var taglineOpacity: CGFloat = 0
 
-    var onComplete: () -> Void
-
     var body: some View {
         ZStack {
             // 파스텔 그라디언트 배경
@@ -75,9 +73,6 @@ struct SplashView: View {
             }
             withAnimation(.easeOut(duration: 0.4).delay(0.55)) {
                 taglineOpacity = 1.0
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
-                onComplete()
             }
         }
     }
@@ -172,5 +167,5 @@ struct LogoMarkSmall: View {
 }
 
 #Preview {
-    SplashView(onComplete: {})
+    SplashView()
 }

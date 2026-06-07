@@ -26,6 +26,7 @@
 		5B10184EC4F8048A0628A913 /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1411C5D213606E031DC3D637 /* ProductCard.swift */; };
 		5B36D9C8EF69A394B36280EB /* RiskCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5D406A61CFE75CD9EF5611A7 /* RiskCalculator.swift */; };
 		5BC48126D4120AEB2145A149 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2380B7806F475E85175CD083 /* ContentView.swift */; };
+		5DFB776C33D2B074845C9368 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = 5B1BC414407DF76E36C05163 /* PrivacyInfo.xcprivacy */; };
 		611E49E904937781EBD5F656 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05510DE0CBAABD81F056506B /* AppState.swift */; };
 		62D0DD9FC2D8D19F3BD89DD1 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F8C307C65E184B5BD6919DA /* OnboardingView.swift */; };
 		6E69798B5845F2C7CE73EA7C /* OCRService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94DF0501D66D34F730963028 /* OCRService.swift */; };
@@ -47,6 +48,7 @@
 		BA287B005F9358D3F9F45FD4 /* AlternativeDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B507EA880AA4B436B5B7B07 /* AlternativeDetailView.swift */; };
 		BF0F7653C7DA61AE046CE666 /* ChatAgentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C602BFB7D8BF56EF2DE609E4 /* ChatAgentView.swift */; };
 		C0630494850F97ACE568CF92 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDEE2EE832D9049B11DEBA3 /* AVFoundation.framework */; };
+		C0A5BB266B16068B4B09B874 /* RecentProductsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1965A5E3B5FD6C35F54B2FC7 /* RecentProductsView.swift */; };
 		C11158C6C843F15C90FFDD25 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15BB7703DE7244F982E90B44 /* SplashView.swift */; };
 		D3D017C23164AD63DBBF21B6 /* ChemiCheckApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ADC1A577765340D300F3304 /* ChemiCheckApp.swift */; };
 		E2D4AB4B1B5EF6BABDE94552 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F849FC07E87E4B724EBD1EA /* HomeView.swift */; };
@@ -63,6 +65,7 @@
 		1411C5D213606E031DC3D637 /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
 		15BB7703DE7244F982E90B44 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		1820A4E96B7F9D87BBF0CFF0 /* ChemicalChip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemicalChip.swift; sourceTree = "<group>"; };
+		1965A5E3B5FD6C35F54B2FC7 /* RecentProductsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentProductsView.swift; sourceTree = "<group>"; };
 		1B507EA880AA4B436B5B7B07 /* AlternativeDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeDetailView.swift; sourceTree = "<group>"; };
 		20DF727FFB7AC210FE4A8E48 /* MyPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageView.swift; sourceTree = "<group>"; };
 		2380B7806F475E85175CD083 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -81,6 +84,7 @@
 		4E78F099E56C0C3DCB90737F /* AlternativeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlternativeCard.swift; sourceTree = "<group>"; };
 		55411CF2D1464739B55B1179 /* Color+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extension.swift"; sourceTree = "<group>"; };
 		5ADC1A577765340D300F3304 /* ChemiCheckApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChemiCheckApp.swift; sourceTree = "<group>"; };
+		5B1BC414407DF76E36C05163 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		5D406A61CFE75CD9EF5611A7 /* RiskCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskCalculator.swift; sourceTree = "<group>"; };
 		5EDEE2EE832D9049B11DEBA3 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		6F849FC07E87E4B724EBD1EA /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -192,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				6F849FC07E87E4B724EBD1EA /* HomeView.swift */,
+				1965A5E3B5FD6C35F54B2FC7 /* RecentProductsView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -260,6 +265,7 @@
 		AAC8BAF5B838DE617C8FD99B /* ChemiCheck */ = {
 			isa = PBXGroup;
 			children = (
+				5B1BC414407DF76E36C05163 /* PrivacyInfo.xcprivacy */,
 				17C191550969E72CE695D2F6 /* App */,
 				AD5F6F4FF742E75B3AC12934 /* Models */,
 				FE7900A7A076FB12111D92E3 /* Resources */,
@@ -402,6 +408,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1916511FC9A479D08AD3602D /* Assets.xcassets in Resources */,
+				5DFB776C33D2B074845C9368 /* PrivacyInfo.xcprivacy in Resources */,
 				296E75FFF66AB5942B33E26A /* alternatives.json in Resources */,
 				EDDBA06E337FC557779C6A85 /* chemicals.json in Resources */,
 				3958F5DDC5C2E901BFDBC602 /* chemicals_cache.json in Resources */,
@@ -451,6 +458,7 @@
 				5B10184EC4F8048A0628A913 /* ProductCard.swift in Sources */,
 				EF7177DA13AB473DB9D8A2A5 /* ProfileEditView.swift in Sources */,
 				9BEE0B604560B1D164BC8F79 /* RecallCuratedLoader.swift in Sources */,
+				C0A5BB266B16068B4B09B874 /* RecentProductsView.swift in Sources */,
 				563CA78FFCD4FE9FE15E9250 /* RiskBadge.swift in Sources */,
 				5B36D9C8EF69A394B36280EB /* RiskCalculator.swift in Sources */,
 				831CE5B976023B4DCE31C529 /* RiskLevel.swift in Sources */,
@@ -467,8 +475,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CHEMICHECK_AIRKOREA_KEY = "g8DzjrjftDbn4W79mm6xoJignITNHH3JrsUOdCN91A4Es2ENg+j2hL0+ZWd4JDOQ17JJaKFZD60duZacYIO3zQ==";
+				CHEMICHECK_PROXY_URL = "https://chemicheck-proxy.inmani1555.workers.dev";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEW = YES;
 				INFOPLIST_FILE = ChemiCheck/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -476,10 +487,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.medix.chemicheck;
 				PRODUCT_NAME = "케미체크";
 				SDKROOT = iphoneos;
+				SWIFT_EMIT_MODULE_INTERFACE = NO;
 				SWIFT_STRICT_CONCURRENCY = minimal;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -544,7 +556,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.9;
+				SWIFT_VERSION = 5.10;
 			};
 			name = Debug;
 		};
@@ -600,7 +612,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
-				SWIFT_VERSION = 5.9;
+				SWIFT_VERSION = 5.10;
 			};
 			name = Release;
 		};
@@ -609,8 +621,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CHEMICHECK_AIRKOREA_KEY = "g8DzjrjftDbn4W79mm6xoJignITNHH3JrsUOdCN91A4Es2ENg+j2hL0+ZWd4JDOQ17JJaKFZD60duZacYIO3zQ==";
+				CHEMICHECK_PROXY_URL = "https://chemicheck-proxy.inmani1555.workers.dev";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_BITCODE = NO;
 				ENABLE_PREVIEW = YES;
 				INFOPLIST_FILE = ChemiCheck/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
@@ -618,10 +633,11 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.medix.chemicheck;
 				PRODUCT_NAME = "케미체크";
 				SDKROOT = iphoneos;
+				SWIFT_EMIT_MODULE_INTERFACE = NO;
 				SWIFT_STRICT_CONCURRENCY = minimal;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

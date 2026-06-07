@@ -3,8 +3,9 @@ import SwiftUI
 @main
 struct ChemiCheckApp: App {
     @State private var appState = AppState()
-    @State private var showSplash = true
-    @State private var showOnboarding = false
+    @State private var phase: AppPhase = .splash
+
+    enum AppPhase { case splash, onboarding, main }
 
     init() {
         DummyDataLoader.shared.loadAll()
@@ -13,31 +14,30 @@ struct ChemiCheckApp: App {
 
     var body: some Scene {
         WindowGroup {
-            Group {
-                if showSplash {
-                    SplashView {
-                        withAnimation(.easeInOut(duration: 0.4)) {
-                            showSplash = false
-                            if !appState.hasCompletedOnboarding {
-                                showOnboarding = true
+            switch phase {
+            case .splash:
+                SplashView()
+                    .onAppear {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                            withAnimation(.easeInOut(duration: 0.35)) {
+                                phase = appState.hasCompletedOnboarding ? .main : .onboarding
                             }
                         }
                     }
-                } else if showOnboarding {
-                    OnboardingView { profile in
-                        appState.familyProfile = profile
-                        appState.completeOnboarding()
-                        withAnimation(.easeInOut(duration: 0.4)) {
-                            showOnboarding = false
-                        }
-                    }
-                    .transition(.move(edge: .trailing).combined(with: .opacity))
-                } else {
-                    ContentView()
-                        .transition(.opacity)
+
+            case .onboarding:
+                OnboardingView { profile in
+                    appState.familyProfile = profile
+                    appState.completeOnboarding()
+                    withAnimation(.easeInOut(duration: 0.35)) { phase = .main }
                 }
+                .transition(.move(edge: .trailing).combined(with: .opacity))
+
+            case .main:
+                ContentView()
+                    .transition(.opacity)
             }
-            .environment(appState)
         }
+        .environment(appState)
     }
 }

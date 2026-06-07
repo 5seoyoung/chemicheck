@@ -145,6 +145,19 @@ struct CameraView: View {
             Text("성분표가 보이도록 충분히 거리를 두세요")
                 .font(.system(size: 12))
                 .foregroundStyle(.white.opacity(0.7))
+
+            // 시뮬레이터 안내
+            #if targetEnvironment(simulator)
+            HStack(spacing: 6) {
+                Image(systemName: "exclamationmark.triangle.fill")
+                    .font(.system(size: 11))
+                Text("시뮬레이터에서는 카메라가 지원되지 않아요. 갤러리 또는 데모 버튼을 사용하세요.")
+                    .font(.system(size: 11))
+                    .multilineTextAlignment(.center)
+            }
+            .foregroundStyle(Color.yellow.opacity(0.9))
+            .padding(.horizontal, 24)
+            #endif
         }
     }
 

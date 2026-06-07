@@ -8,34 +8,24 @@ struct ContentView: View {
     @State private var showDiagnosis = false
 
     var body: some View {
-        TabView(selection: $selectedTab) {
-            HomeView()
-                .tabItem { Label("홈", systemImage: "house") }
-                .tag(0)
+        ZStack(alignment: .bottom) {
+            Color(hex: "#F3FAF5").ignoresSafeArea()
 
-            // 진단 탭: tap 시 카메라 시트 오픈
-            Color.clear
-                .tabItem { Label("진단", systemImage: "viewfinder") }
-                .tag(1)
-
-            MyProductsView()
-                .tabItem { Label("내 제품", systemImage: "list.bullet") }
-                .tag(2)
-
-            ChatAgentView()
-                .tabItem { Label("AI 상담", systemImage: "bubble.left.and.bubble.right") }
-                .tag(3)
-
-            MyPageView()
-                .tabItem { Label("마이", systemImage: "person") }
-                .tag(4)
-        }
-        .tint(Color.brandNavy)
-        .onChange(of: selectedTab) { old, new in
-            if new == 1 {
-                showCamera = true
-                selectedTab = old
+            // 활성 탭만 렌더링
+            Group {
+                if selectedTab == 0 {
+                    HomeView(selectedTab: $selectedTab)
+                } else if selectedTab == 1 {
+                    NavigationStack { MyProductsView() }
+                } else if selectedTab == 2 {
+                    NavigationStack { ChatAgentView() }
+                } else {
+                    NavigationStack { MyPageView() }
+                }
             }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+
+            customTabBar
         }
         .sheet(isPresented: $showCamera) {
             CameraView(
@@ -44,9 +34,7 @@ struct ContentView: View {
                     Task {
                         await diagnosisVM.analyzeImage(image, for: appState.familyProfile)
                         await MainActor.run {
-                            if let p = diagnosisVM.currentProduct {
-                                appState.addRecentProduct(p)
-                            }
+                            if let p = diagnosisVM.currentProduct { appState.addRecentProduct(p) }
                             showDiagnosis = true
                         }
                     }
@@ -55,17 +43,15 @@ struct ContentView: View {
                     diagnosisVM.loadProduct(product, for: appState.familyProfile)
                     appState.addRecentProduct(product)
                     showCamera = false
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) {
-                        showDiagnosis = true
-                    }
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.35) { showDiagnosis = true }
                 }
             )
         }
         .sheet(isPresented: $showDiagnosis) {
-            if let product = diagnosisVM.currentProduct {
+            if let p = diagnosisVM.currentProduct {
                 DiagnosisResultView(
-                    product: product,
-                    adjustedRiskLevel: diagnosisVM.adjustedRiskLevel ?? product.riskLevel,
+                    product: p,
+                    adjustedRiskLevel: diagnosisVM.adjustedRiskLevel ?? p.riskLevel,
                     familyWarnings: diagnosisVM.familyWarnings,
                     alternatives: diagnosisVM.alternatives
                 )
@@ -74,9 +60,65 @@ struct ContentView: View {
             }
         }
     }
+
+    // MARK: - Custom Tab Bar
+
+    private var customTabBar: some View {
+        VStack(spacing: 0) {
+            Rectangle().fill(Color.separatorSoft).frame(height: 1)
+
+            HStack(alignment: .bottom, spacing: 0) {
+                tabButton(icon: "house.fill",                       label: "홈",         tag: 0)
+                tabButton(icon: "shippingbox.fill",                 label: "내 제품",    tag: 1)
+
+                Button { showCamera = true } label: {
+                    ZStack {
+                        Circle()
+                            .fill(LinearGradient(
+                                colors: [Color.brandGreen, Color(hex: "#18865A")],
+                                startPoint: .topLeading, endPoint: .bottomTrailing))
+                            .frame(width: 56, height: 56)
+                            .shadow(color: Color.brandGreen.opacity(0.5), radius: 12, x: 0, y: 5)
+                        Image(systemName: "camera.fill")
+                            .font(.system(size: 22, weight: .semibold))
+                            .foregroundStyle(.white)
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .offset(y: -16)
+
+                tabButton(icon: "bubble.left.and.bubble.right.fill", label: "AI 상담",    tag: 2)
+                tabButton(icon: "person.fill",                       label: "마이페이지", tag: 3)
+            }
+            .padding(.horizontal, 4)
+            .padding(.top, 10)
+            .padding(.bottom, 8)
+            .background(Color.white)
+
+            Color.white.frame(height: 34)
+        }
+    }
+
+    @ViewBuilder
+    private func tabButton(icon: String, label: String, tag: Int) -> some View {
+        Button {
+            withAnimation(.easeInOut(duration: 0.18)) { selectedTab = tag }
+        } label: {
+            VStack(spacing: 4) {
+                Image(systemName: icon)
+                    .font(.system(size: 20))
+                    .foregroundStyle(selectedTab == tag ? Color.brandNavy : Color.textTertiary)
+                Text(label)
+                    .font(.system(size: 9, weight: selectedTab == tag ? .bold : .regular))
+                    .foregroundStyle(selectedTab == tag ? Color.brandNavy : Color.textTertiary)
+            }
+            .frame(maxWidth: .infinity)
+            .contentShape(Rectangle())
+        }
+    }
 }
 
-// MARK: - 분석 진행 뷰
+// MARK: - Analyzing View
 
 struct AnalyzingView: View {
     let step: AnalysisStep
@@ -138,6 +180,5 @@ struct AnalyzingView: View {
 }
 
 #Preview {
-    ContentView()
-        .environment(AppState())
+    ContentView().environment(AppState())
 }

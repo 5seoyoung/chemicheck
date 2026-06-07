@@ -178,6 +178,7 @@ final class FoodDrugAPIService {
         case .insecticide: return "ant.fill"
         case .multipurpose: return "spray.and.sparkles"
         case .bleach:      return "drop.fill"
+        case .babyHygiene: return "figure.and.child.holdinghands"
         }
     }
 }

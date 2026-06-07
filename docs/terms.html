@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>이용약관 — 케미체크</title>
+  <style>
+    :root {
+      --navy: #1A2F6E;
+      --green: #22B573;
+      --bg: #F8FAFC;
+      --card: #FFFFFF;
+      --text1: #1F2937;
+      --text2: #5B6577;
+      --line: #EEF1F6;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+                   "Noto Sans KR", sans-serif;
+      background: var(--bg);
+      color: var(--text1);
+      line-height: 1.75;
+      font-size: 15px;
+    }
+    header {
+      background: var(--navy);
+      padding: 28px 24px 24px;
+      text-align: center;
+    }
+    .logo { font-size: 20px; font-weight: 800; color: #fff; }
+    .logo span { color: var(--green); }
+    header p { color: rgba(255,255,255,0.6); font-size: 13px; margin-top: 6px; }
+    main { max-width: 680px; margin: 0 auto; padding: 36px 20px 80px; }
+    .badge {
+      display: inline-block; background: var(--green); color: #fff;
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 20px; margin-bottom: 20px;
+    }
+    h1 { font-size: 24px; font-weight: 800; color: var(--navy); margin-bottom: 6px; }
+    .intro { color: var(--text2); font-size: 14px; margin-bottom: 32px; }
+    section { margin-bottom: 32px; }
+    h2 {
+      font-size: 16px; font-weight: 700; color: var(--navy);
+      padding-bottom: 8px; border-bottom: 2px solid var(--green);
+      margin-bottom: 14px;
+    }
+    p { margin-bottom: 12px; color: var(--text1); }
+    ul { padding-left: 20px; margin-bottom: 12px; }
+    li { margin-bottom: 6px; color: var(--text1); }
+    .warning-box {
+      background: #FFF3CD; border-left: 4px solid #F59E0B;
+      padding: 16px 18px; border-radius: 8px; margin-bottom: 20px;
+      font-size: 14px; color: #92400E;
+    }
+    .contact-box {
+      background: var(--card); border: 1px solid var(--line);
+      padding: 20px; border-radius: 12px; margin-top: 24px;
+    }
+    .contact-box h3 { font-size: 14px; font-weight: 700; color: var(--navy); margin-bottom: 8px; }
+    .contact-box a { color: var(--green); text-decoration: none; font-weight: 600; }
+    footer {
+      text-align: center; color: var(--text2); font-size: 12px;
+      padding: 20px; border-top: 1px solid var(--line);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">케미<span>체크</span></div>
+  <p>ChemiCheck · MediX</p>
+</header>
+
+<main>
+  <span class="badge">최종 수정일 2026.06.05</span>
+  <h1>이용약관</h1>
+  <p class="intro">
+    케미체크(ChemiCheck) 앱을 사용하시기 전에 아래 이용약관을 주의 깊게 읽어 주세요.
+    앱을 설치하거나 사용함으로써 본 약관에 동의한 것으로 간주됩니다.
+  </p>
+
+  <div class="warning-box">
+    ⚠️ <strong>중요:</strong> 케미체크는 참고용 정보 서비스입니다. 의료적 진단·처방·치료를 대체하지 않습니다.
+    건강 이상이 의심되는 경우 반드시 전문의 또는 약사와 상담하시고, 긴급 상황에서는 119에 신고하거나
+    중독정보센터(1339)에 문의하세요.
+  </div>
+
+  <section>
+    <h2>제1조 (서비스 목적)</h2>
+    <p>
+      케미체크는 생활화학제품의 성분 정보를 쉽게 확인하고, 가족 구성원의 특성에 맞는
+      안전 정보를 제공하기 위한 모바일 앱입니다. 제공되는 정보는 공공 데이터(식품의약품안전처,
+      환경부, 한국환경공단)를 기반으로 합니다.
+    </p>
+  </section>
+
+  <section>
+    <h2>제2조 (서비스 이용 조건)</h2>
+    <ul>
+      <li>본 서비스는 iOS 17.0 이상의 iPhone에서 이용할 수 있습니다.</li>
+      <li>만 14세 미만의 아동은 보호자의 동의 하에 사용해야 합니다.</li>
+      <li>회원가입 없이 사용 가능하며, 모든 데이터는 사용자 기기에 로컬로 저장됩니다.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>제3조 (서비스 내용 및 제한)</h2>
+    <p>케미체크는 다음 기능을 제공합니다:</p>
+    <ul>
+      <li>카메라·갤러리를 이용한 제품 라벨 OCR 텍스트 인식</li>
+      <li>화학물질 안전 정보 조회 (식약처 공공데이터 기반)</li>
+      <li>가족 구성원 맞춤 위험도 계산</li>
+      <li>AI 생활화학 안전 상담 (Claude API, Anthropic 제공)</li>
+      <li>대기질 기반 환기 가이드 (에어코리아 API)</li>
+      <li>제품 회수·판매중지 고시 알림 (환경부 큐레이션 데이터)</li>
+    </ul>
+    <p>
+      제공되는 정보는 식품의약품안전처, 환경부, 한국환경공단의 공공 데이터를 기반으로 하며,
+      최신성·완전성을 보장하지 않습니다. 중요한 판단은 반드시 해당 기관의 공식 자료를 확인하세요.
+    </p>
+  </section>
+
+  <section>
+    <h2>제4조 (의료·법적 면책)</h2>
+    <p>
+      케미체크는 정보 제공 목적의 서비스이며, 다음 사항에 대해 책임을 지지 않습니다:
+    </p>
+    <ul>
+      <li>앱 정보를 바탕으로 한 의료적 판단 또는 치료 행위</li>
+      <li>OCR 인식 오류로 인한 화학물질 정보 오매칭</li>
+      <li>AI 상담 결과의 정확성 또는 완전성</li>
+      <li>공공 API 데이터의 지연·오류·누락</li>
+      <li>화학물질 노출 또는 중독으로 인한 신체적 피해</li>
+    </ul>
+    <p>
+      화학물질 사고 시 즉시 119(응급) 또는 중독정보센터(1339)에 연락하십시오.
+      케미체크 앱 정보에만 의존하지 마세요.
+    </p>
+  </section>
+
+  <section>
+    <h2>제5조 (데이터 및 개인정보)</h2>
+    <p>
+      케미체크는 가족 프로필·등록 제품 등 사용자 데이터를 기기 내(UserDefaults)에만 저장합니다.
+      사진·이미지는 외부 서버로 전송되지 않습니다. AI 상담 시 입력하는 텍스트 질문은
+      Anthropic의 Claude API로 전송됩니다. 자세한 내용은
+      <a href="privacy.html">개인정보처리방침</a>을 확인하세요.
+    </p>
+  </section>
+
+  <section>
+    <h2>제6조 (서비스 변경·중단)</h2>
+    <p>
+      MediX는 서비스의 내용을 언제든지 수정·중단할 수 있습니다. 외부 API(에어코리아,
+      Claude API 등) 정책 변경이나 서버 상황에 따라 일부 기능이 일시적으로
+      제공되지 않을 수 있습니다. 서비스 중단으로 인한 손해에 대해 책임을 지지 않습니다.
+    </p>
+  </section>
+
+  <section>
+    <h2>제7조 (지식재산권)</h2>
+    <p>
+      앱 내 디자인, 코드, 로고, 카피 등 모든 콘텐츠의 저작권은 MediX에 있습니다.
+      무단 복제·배포·상업적 이용을 금지합니다. 공공데이터(식약처·환경부·에어코리아)는
+      각 기관의 이용 정책을 따릅니다.
+    </p>
+  </section>
+
+  <section>
+    <h2>제8조 (약관 변경)</h2>
+    <p>
+      본 약관은 사전 공지 없이 변경될 수 있습니다. 변경된 약관은 앱 내 공지 또는
+      개인정보처리방침 페이지를 통해 안내됩니다. 변경 후에도 앱을 계속 사용하는 경우
+      변경된 약관에 동의한 것으로 간주합니다.
+    </p>
+  </section>
+
+  <section>
+    <h2>제9조 (준거법 및 분쟁 해결)</h2>
+    <p>
+      본 약관은 대한민국 법률에 따라 해석됩니다. 분쟁 발생 시 MediX 소재지를
+      관할하는 법원을 전속 관할 법원으로 합니다.
+    </p>
+  </section>
+
+  <section>
+    <h2>제10조 (부칙)</h2>
+    <p>본 약관은 2026년 6월 5일부터 시행됩니다.</p>
+  </section>
+
+  <div class="contact-box">
+    <h3>문의하기</h3>
+    <p>이용약관에 대한 문의는 아래 이메일로 연락주세요.</p>
+    <a href="mailto:inmani1555@gmail.com">inmani1555@gmail.com</a>
+  </div>
+</main>
+
+<footer>
+  <p>© 2026 MediX · <a href="privacy.html" style="color:#22B573">개인정보처리방침</a> · <a href="terms.html" style="color:#22B573">이용약관</a></p>
+</footer>
+
+</body>
+</html>

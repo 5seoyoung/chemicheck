@@ -9,135 +9,125 @@ struct MyPageView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView {
-                VStack(spacing: 0) {
-                    // Profile summary
-                    profileHeader
-                        .padding(.horizontal, 20)
-                        .padding(.top, 20)
-                        .padding(.bottom, 24)
+            ScrollView(showsIndicators: false) {
+                VStack(spacing: 16) {
+                    // Profile card
+                    profileCard
+                        .padding(.horizontal, 16)
 
-                    // Stats
-                    statsSection
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 24)
+                    // Stats row
+                    statsRow
+                        .padding(.horizontal, 16)
 
-                    // Settings sections
-                    settingsSection
-                        .padding(.horizontal, 20)
-                        .padding(.bottom, 24)
+                    // Settings
+                    settingsCard
+                        .padding(.horizontal, 16)
 
                     // About
-                    aboutSection
-                        .padding(.horizontal, 20)
+                    aboutCard
+                        .padding(.horizontal, 16)
                         .padding(.bottom, 100)
                 }
+                .padding(.top, 16)
             }
-            .background(Color.bgPrimary)
-            .navigationTitle("마이페이지")
-            .navigationBarTitleDisplayMode(.large)
-            // 숨김 제스처: 네비게이션 타이틀 영역 3번 탭 → 데모 패널
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    Text("마이페이지")
-                        .font(.system(size: 17, weight: .semibold))
-                        .onTapGesture {
-                            titleTapCount += 1
-                            if titleTapCount >= 3 {
-                                titleTapCount = 0
-                                showDemoPanel = true
-                            }
-                        }
-                }
-            }
+            .background(Color(hex: "#F3FAF5").ignoresSafeArea())
+            .navigationBarHidden(true)
         }
-        .sheet(isPresented: $showProfileEdit) {
-            ProfileEditView()
-        }
-        .sheet(isPresented: $showDemoPanel) {
-            DemoModePanel()
-        }
+        .sheet(isPresented: $showProfileEdit) { ProfileEditView() }
+        .sheet(isPresented: $showDemoPanel) { DemoModePanel() }
     }
 
-    private var profileHeader: some View {
+    // MARK: - Profile Card
+
+    private var profileCard: some View {
         VStack(spacing: 16) {
-            // Avatar
-            ZStack {
-                Circle()
-                    .fill(Color.brandNavy.opacity(0.1))
-                    .frame(width: 80, height: 80)
-                Image(systemName: "person.crop.circle.fill")
-                    .font(.system(size: 60))
-                    .foregroundStyle(Color.brandNavy)
-            }
-
-            VStack(spacing: 4) {
-                HStack(spacing: 6) {
-                    Text("우리 가족")
-                        .font(.system(size: 20, weight: .bold))
-                        .foregroundStyle(Color.textPrimary)
-                    TFIcon.home(size: 24)
+            HStack(spacing: 14) {
+                ZStack {
+                    Circle()
+                        .fill(LinearGradient(
+                            colors: [Color.brandNavy.opacity(0.15), Color.brandNavy.opacity(0.08)],
+                            startPoint: .topLeading, endPoint: .bottomTrailing))
+                        .frame(width: 64, height: 64)
+                    Image(systemName: "person.crop.circle.fill")
+                        .font(.system(size: 58))
+                        .foregroundStyle(Color.brandNavy)
                 }
 
-                Text(appState.familyProfile.memberSummary)
-                    .font(.system(size: 13))
-                    .foregroundStyle(Color.textSecondary)
-                    .multilineTextAlignment(.center)
+                VStack(alignment: .leading, spacing: 4) {
+                    HStack(spacing: 6) {
+                        Text("우리 가족")
+                            .font(.system(size: 18, weight: .bold))
+                            .foregroundStyle(Color.textPrimary)
+                        Text("🏠")
+                    }
+                    Text(appState.familyProfile.memberSummary)
+                        .font(.system(size: 13))
+                        .foregroundStyle(Color.textSecondary)
+                        .lineLimit(2)
+                }
+
+                Spacer()
             }
 
-            Button {
-                showProfileEdit = true
-            } label: {
-                Label("가족 프로필 수정", systemImage: "pencil")
-                    .font(.system(size: 14, weight: .medium))
-                    .foregroundStyle(Color.brandNavy)
-                    .padding(.vertical, 8)
-                    .padding(.horizontal, 16)
-                    .background(Color.brandNavy.opacity(0.08))
-                    .clipShape(Capsule())
+            Button { showProfileEdit = true } label: {
+                HStack(spacing: 6) {
+                    Image(systemName: "pencil").font(.system(size: 12, weight: .semibold))
+                    Text("가족 프로필 수정")
+                        .font(.system(size: 13, weight: .semibold))
+                }
+                .foregroundStyle(Color.brandNavy)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 10)
+                .background(Color.navySoft)
+                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
+            .buttonStyle(.plain)
         }
-        .frame(maxWidth: .infinity)
         .padding(20)
-        .cardStyle()
-    }
-
-    private var statsSection: some View {
-        VStack(alignment: .leading, spacing: 12) {
-            Text("이용 현황")
-                .font(.system(size: 17, weight: .bold))
-                .foregroundStyle(Color.textPrimary)
-
-            HStack(spacing: 12) {
-                statCard(
-                    value: "\(appState.recentProducts.count)",
-                    label: "진단 횟수",
-                    icon: "camera.viewfinder",
-                    color: .brandNavy
-                )
-                statCard(
-                    value: "\(appState.registeredProducts.count)",
-                    label: "등록 제품",
-                    icon: "shippingbox.fill",
-                    color: .brandGreen
-                )
-                statCard(
-                    value: "\(appState.registeredProducts.filter { $0.isRecalled }.count)",
-                    label: "회수 알림",
-                    icon: "bell.badge.fill",
-                    color: .riskCritical
-                )
-            }
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+        .shadow(color: .black.opacity(0.05), radius: 8, x: 0, y: 2)
+        // 숨김 제스처: 프로필 카드 상단 4회 탭 → 데모 패널
+        .onTapGesture {
+            titleTapCount += 1
+            if titleTapCount >= 4 { titleTapCount = 0; showDemoPanel = true }
         }
     }
 
-    private func statCard(value: String, label: String, icon: String, color: Color) -> some View {
+    // MARK: - Stats Row
+
+    private var statsRow: some View {
+        HStack(spacing: 10) {
+            miniStatCard(
+                icon: "camera.viewfinder", color: Color.brandNavy,
+                bg: Color.navySoft,
+                value: "\(appState.recentProducts.count)",
+                label: "진단 횟수"
+            )
+            miniStatCard(
+                icon: "shippingbox.fill", color: Color.brandGreen,
+                bg: Color.greenSoft,
+                value: "\(appState.registeredProducts.count)",
+                label: "등록 제품"
+            )
+            miniStatCard(
+                icon: "bell.badge.fill", color: Color(hex: "#FF5252"),
+                bg: Color(hex: "#FFE8E8"),
+                value: "\(appState.registeredProducts.filter { $0.isRecalled }.count)",
+                label: "회수 알림"
+            )
+        }
+    }
+
+    private func miniStatCard(icon: String, color: Color, bg: Color, value: String, label: String) -> some View {
         VStack(spacing: 8) {
-            Image(systemName: icon)
-                .font(.system(size: 20))
-                .foregroundStyle(color)
+            ZStack {
+                RoundedRectangle(cornerRadius: 10, style: .continuous)
+                    .fill(bg).frame(width: 38, height: 38)
+                Image(systemName: icon).font(.system(size: 17)).foregroundStyle(color)
+            }
             Text(value)
-                .font(.system(size: 24, weight: .bold))
+                .font(.system(size: 20, weight: .bold, design: .rounded))
                 .foregroundStyle(Color.textPrimary)
             Text(label)
                 .font(.system(size: 11))
@@ -145,87 +135,121 @@ struct MyPageView: View {
         }
         .frame(maxWidth: .infinity)
         .padding(.vertical, 16)
-        .cardStyle()
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 2)
     }
 
-    private var settingsSection: some View {
+    // MARK: - Settings Card
+
+    private var settingsCard: some View {
         VStack(alignment: .leading, spacing: 12) {
             Text("설정")
-                .font(.system(size: 17, weight: .bold))
+                .font(.system(size: 15, weight: .bold))
                 .foregroundStyle(Color.textPrimary)
+                .padding(.horizontal, 4)
 
             VStack(spacing: 0) {
-                settingsRow(icon: "person.3.fill", color: .brandNavy, title: "가족 프로필 관리") {
-                    showProfileEdit = true
-                }
-                Divider().padding(.leading, 52)
-                settingsRow(icon: "bell.fill", color: .riskMedium, title: "알림 설정") {
+                settingsRow(icon: "person.3.fill", bg: Color.navySoft, iconColor: Color.brandNavy,
+                            title: "가족 프로필 관리") { showProfileEdit = true }
+                separator
+                settingsRow(icon: "bell.fill", bg: Color(hex: "#FFF0E0"), iconColor: Color(hex: "#FF9845"),
+                            title: "알림 설정") {
                     if let url = URL(string: UIApplication.openNotificationSettingsURLString) {
                         UIApplication.shared.open(url)
                     }
                 }
-                Divider().padding(.leading, 52)
-                settingsRow(icon: "lock.fill", color: .brandGreen, title: "개인정보 처리방침") {
-                    if let url = URL(string: "https://chemicheck.notion.site/privacy") {
+                separator
+                settingsRow(icon: "lock.fill", bg: Color.greenSoft, iconColor: Color.brandGreen,
+                            title: "개인정보 처리방침") {
+                    if let url = URL(string: "https://5seoyoung.github.io/chemicheck/privacy.html") {
                         UIApplication.shared.open(url)
                     }
                 }
-                Divider().padding(.leading, 52)
-                settingsRow(icon: "questionmark.circle.fill", color: .textTertiary, title: "고객 지원") {
+                separator
+                settingsRow(icon: "doc.text.fill", bg: Color.lavenderSoft, iconColor: Color.lavender,
+                            title: "이용약관") {
+                    if let url = URL(string: "https://5seoyoung.github.io/chemicheck/terms.html") {
+                        UIApplication.shared.open(url)
+                    }
+                }
+                separator
+                settingsRow(icon: "questionmark.circle.fill", bg: Color.bgSecondary, iconColor: Color.textTertiary,
+                            title: "고객 지원") {
                     if let url = URL(string: "mailto:inmani1555@gmail.com?subject=케미체크 문의") {
                         UIApplication.shared.open(url)
                     }
                 }
             }
-            .cardStyle()
+            .background(Color.white)
+            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 2)
         }
     }
 
-    private func settingsRow(icon: String, color: Color, title: String, action: @escaping () -> Void) -> some View {
+    private var separator: some View {
+        Divider().padding(.leading, 56)
+    }
+
+    private func settingsRow(icon: String, bg: Color, iconColor: Color, title: String, action: @escaping () -> Void) -> some View {
         Button(action: action) {
-            HStack(spacing: 14) {
+            HStack(spacing: 12) {
                 ZStack {
                     RoundedRectangle(cornerRadius: 8, style: .continuous)
-                        .fill(color.opacity(0.12))
-                        .frame(width: 34, height: 34)
+                        .fill(bg).frame(width: 34, height: 34)
                     Image(systemName: icon)
-                        .font(.system(size: 15))
-                        .foregroundStyle(color)
+                        .font(.system(size: 14)).foregroundStyle(iconColor)
                 }
                 Text(title)
                     .font(.system(size: 15))
                     .foregroundStyle(Color.textPrimary)
                 Spacer()
                 Image(systemName: "chevron.right")
-                    .font(.system(size: 13))
+                    .font(.system(size: 12))
                     .foregroundStyle(Color.textTertiary)
             }
-            .padding(.vertical, 12)
-            .padding(.horizontal, 16)
+            .padding(.vertical, 13).padding(.horizontal, 16)
         }
         .buttonStyle(.plain)
     }
 
-    private var aboutSection: some View {
-        VStack(spacing: 10) {
-            VStack(spacing: 2) {
-                HStack(spacing: 0) {
-                    Text("케미").foregroundStyle(Color.brandNavy)
-                    Text("체크").foregroundStyle(Color.brandGreen)
-                }
-                .font(.system(size: 16, weight: .bold))
-                Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") · MediX")
-                    .font(.system(size: 12))
-                    .foregroundStyle(Color.textTertiary)
-            }
+    // MARK: - About Card
 
-            Text("본 서비스는 참고 목적으로 제공됩니다.\n의료적 판단은 전문의 상담을 받으세요.")
+    private var aboutCard: some View {
+        VStack(spacing: 12) {
+            HStack(spacing: 0) {
+                Text("케미").foregroundStyle(Color.brandNavy)
+                Text("체크").foregroundStyle(Color.brandGreen)
+            }
+            .font(.system(size: 17, weight: .bold))
+
+            Text("v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "1.0") · MediX")
+                .font(.system(size: 12))
+                .foregroundStyle(Color.textTertiary)
+
+            Text("본 서비스는 참고 목적으로 제공됩니다.\n의료적 판단은 반드시 전문의 상담을 받으세요.")
                 .font(.system(size: 11))
                 .foregroundStyle(Color.textTertiary)
                 .multilineTextAlignment(.center)
+                .lineSpacing(2)
+
+            HStack(spacing: 8) {
+                Text("식약처").font(.system(size: 10, weight: .medium)).foregroundStyle(Color.textTertiary)
+                    .padding(.vertical, 3).padding(.horizontal, 8)
+                    .background(Color.bgSecondary).clipShape(Capsule())
+                Text("환경부").font(.system(size: 10, weight: .medium)).foregroundStyle(Color.textTertiary)
+                    .padding(.vertical, 3).padding(.horizontal, 8)
+                    .background(Color.bgSecondary).clipShape(Capsule())
+                Text("에어코리아").font(.system(size: 10, weight: .medium)).foregroundStyle(Color.textTertiary)
+                    .padding(.vertical, 3).padding(.horizontal, 8)
+                    .background(Color.bgSecondary).clipShape(Capsule())
+            }
         }
         .frame(maxWidth: .infinity)
-        .padding(16)
+        .padding(20)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .shadow(color: .black.opacity(0.05), radius: 6, x: 0, y: 2)
     }
 }
 
@@ -264,35 +288,24 @@ struct DemoModePanel: View {
 
                 Section {
                     Button(role: .destructive) {
-                        DemoModeManager.shared.isOn = false
-                        isDemoOn = false
-                    } label: {
-                        Text("데모 모드 OFF로 초기화")
-                            .font(.system(size: 15))
-                    }
+                        DemoModeManager.shared.isOn = false; isDemoOn = false
+                    } label: { Text("데모 모드 OFF로 초기화").font(.system(size: 15)) }
                 }
             }
             .navigationTitle("개발자 설정")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .cancellationAction) {
-                    Button("닫기") { dismiss() }
-                }
+                ToolbarItem(placement: .cancellationAction) { Button("닫기") { dismiss() } }
             }
         }
     }
 
     private func demoRow(icon: String, color: Color, label: String, value: String) -> some View {
         HStack {
-            Image(systemName: icon)
-                .foregroundStyle(color)
-                .frame(width: 22)
-            Text(label)
-                .font(.system(size: 14))
+            Image(systemName: icon).foregroundStyle(color).frame(width: 22)
+            Text(label).font(.system(size: 14))
             Spacer()
-            Text(value)
-                .font(.system(size: 13))
-                .foregroundStyle(Color.textSecondary)
+            Text(value).font(.system(size: 13)).foregroundStyle(Color.textSecondary)
         }
     }
 }
@@ -304,12 +317,14 @@ final class DemoModeManager {
     private init() {}
 
     var isOn: Bool {
-        get { UserDefaults.standard.bool(forKey: "demoMode") }
+        get {
+            if ProcessInfo.processInfo.environment["DEMO_MODE_FORCE"] == "1" { return true }
+            return UserDefaults.standard.bool(forKey: "demoMode")
+        }
         set { UserDefaults.standard.set(newValue, forKey: "demoMode") }
     }
 }
 
 #Preview {
-    MyPageView()
-        .environment(AppState())
+    MyPageView().environment(AppState())
 }

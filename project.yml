@@ -8,7 +8,7 @@ options:
 
 settings:
   base:
-    SWIFT_VERSION: "5.9"
+    SWIFT_VERSION: "5.10"
 
 targets:
   ChemiCheck:
@@ -21,15 +21,72 @@ targets:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.medix.chemicheck
         PRODUCT_NAME: 케미체크
-        MARKETING_VERSION: "1.0"
+        MARKETING_VERSION: "1.0.0"
         CURRENT_PROJECT_VERSION: "1"
         INFOPLIST_FILE: ChemiCheck/Resources/Info.plist
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
         SWIFT_STRICT_CONCURRENCY: minimal
         ENABLE_PREVIEW: YES
+        # Bitcode는 Xcode 14부터 deprecated — Archive 에러 방지
+        ENABLE_BITCODE: NO
+        # App Intents 미사용 — ExtractAppIntentsMetadata 빌드 페이즈 비활성화
+        SWIFT_EMIT_MODULE_INTERFACE: NO
+        # API 키 — Xcode Scheme 환경변수 없는 TestFlight 빌드에서 Info.plist로 주입
+        # Debug: Scheme 환경변수로 override, Release: 여기 값이 번들에 포함
+        CHEMICHECK_PROXY_URL: "https://chemicheck-proxy.inmani1555.workers.dev"
+        CHEMICHECK_AIRKOREA_KEY: "g8DzjrjftDbn4W79mm6xoJignITNHH3JrsUOdCN91A4Es2ENg+j2hL0+ZWd4JDOQ17JJaKFZD60duZacYIO3zQ=="
     dependencies:
       - sdk: AVFoundation.framework
       - sdk: Vision.framework
       - sdk: UserNotifications.framework
       - sdk: CoreLocation.framework
+
+schemes:
+  ChemiCheck:
+    build:
+      targets:
+        ChemiCheck: all
+    run:
+      config: Debug
+      environmentVariables:
+        AIR_KOREA_API_KEY: "g8DzjrjftDbn4W79mm6xoJignITNHH3JrsUOdCN91A4Es2ENg+j2hL0+ZWd4JDOQ17JJaKFZD60duZacYIO3zQ=="
+        PROXY_BASE_URL: "https://chemicheck-proxy.inmani1555.workers.dev"
+    test:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  ChemiCheck-Demo:
+    build:
+      targets:
+        ChemiCheck: [run, analyze]
+    run:
+      config: Debug
+      environmentVariables:
+        AIR_KOREA_API_KEY: "g8DzjrjftDbn4W79mm6xoJignITNHH3JrsUOdCN91A4Es2ENg+j2hL0+ZWd4JDOQ17JJaKFZD60duZacYIO3zQ=="
+        PROXY_BASE_URL: "https://chemicheck-proxy.inmani1555.workers.dev"
+        DEMO_MODE_FORCE: "1"
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
+  ChemiCheck-Release:
+    build:
+      targets:
+        ChemiCheck: all
+    run:
+      config: Release
+    profile:
+      config: Release
+    analyze:
+      config: Release
+    archive:
+      config: Release
