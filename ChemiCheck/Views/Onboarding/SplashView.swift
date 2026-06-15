@@ -1,6 +1,8 @@
 import SwiftUI
 
 struct SplashView: View {
+    var onComplete: () -> Void = {}
+
     @State private var logoScale: CGFloat = 0.75
     @State private var logoOpacity: CGFloat = 0
     @State private var textOpacity: CGFloat = 0
@@ -73,6 +75,9 @@ struct SplashView: View {
             }
             withAnimation(.easeOut(duration: 0.4).delay(0.55)) {
                 taglineOpacity = 1.0
+            }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                onComplete()
             }
         }
     }

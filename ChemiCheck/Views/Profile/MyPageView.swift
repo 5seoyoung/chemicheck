@@ -257,7 +257,9 @@ struct MyPageView: View {
 
 struct DemoModePanel: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(AppState.self) private var appState
     @State private var isDemoOn = DemoModeManager.shared.isOn
+    @State private var showResetConfirm = false
 
     var body: some View {
         NavigationStack {
@@ -288,14 +290,38 @@ struct DemoModePanel: View {
 
                 Section {
                     Button(role: .destructive) {
+                        showResetConfirm = true
+                    } label: {
+                        HStack(spacing: 10) {
+                            Image(systemName: "arrow.counterclockwise.circle.fill")
+                            Text("앱 전체 초기화 (처음부터 시작)")
+                                .font(.system(size: 15))
+                        }
+                    }
+
+                    Button(role: .destructive) {
                         DemoModeManager.shared.isOn = false; isDemoOn = false
                     } label: { Text("데모 모드 OFF로 초기화").font(.system(size: 15)) }
+                } footer: {
+                    Text("전체 초기화 시 가족 프로필·등록 제품·최근 기록이 모두 삭제되고 온보딩 화면부터 다시 시작합니다.")
+                        .font(.system(size: 11))
                 }
             }
             .navigationTitle("개발자 설정")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .cancellationAction) { Button("닫기") { dismiss() } }
+            }
+            .confirmationDialog("앱 전체 초기화", isPresented: $showResetConfirm, titleVisibility: .visible) {
+                Button("초기화하고 처음부터 시작", role: .destructive) {
+                    dismiss()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        appState.resetAll()
+                    }
+                }
+                Button("취소", role: .cancel) {}
+            } message: {
+                Text("가족 프로필, 등록 제품, 최근 기록이 모두 삭제됩니다.")
             }
         }
     }
@@ -319,6 +345,7 @@ final class DemoModeManager {
     var isOn: Bool {
         get {
             if ProcessInfo.processInfo.environment["DEMO_MODE_FORCE"] == "1" { return true }
+            if UserDefaults.standard.object(forKey: "demoMode") == nil { return true }
             return UserDefaults.standard.bool(forKey: "demoMode")
         }
         set { UserDefaults.standard.set(newValue, forKey: "demoMode") }

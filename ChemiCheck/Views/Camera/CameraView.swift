@@ -145,19 +145,6 @@ struct CameraView: View {
             Text("성분표가 보이도록 충분히 거리를 두세요")
                 .font(.system(size: 12))
                 .foregroundStyle(.white.opacity(0.7))
-
-            // 시뮬레이터 안내
-            #if targetEnvironment(simulator)
-            HStack(spacing: 6) {
-                Image(systemName: "exclamationmark.triangle.fill")
-                    .font(.system(size: 11))
-                Text("시뮬레이터에서는 카메라가 지원되지 않아요. 갤러리 또는 데모 버튼을 사용하세요.")
-                    .font(.system(size: 11))
-                    .multilineTextAlignment(.center)
-            }
-            .foregroundStyle(Color.yellow.opacity(0.9))
-            .padding(.horizontal, 24)
-            #endif
         }
     }
 
@@ -165,18 +152,18 @@ struct CameraView: View {
 
     private var bottomControls: some View {
         HStack(spacing: 0) {
-            // 갤러리 (PhotosPicker)
+            // 갤러리 선택 (좌측)
             PhotosPicker(selection: $selectedPhotoItem, matching: .images) {
-                VStack(spacing: 6) {
+                VStack(spacing: 4) {
                     Image(systemName: "photo.on.rectangle")
-                        .font(.system(size: 22))
+                        .font(.system(size: 20))
                         .foregroundStyle(.white)
                     Text("갤러리")
-                        .font(.system(size: 11))
+                        .font(.system(size: 10))
                         .foregroundStyle(.white.opacity(0.8))
                 }
-                .frame(width: 70)
             }
+            .frame(width: 80)
 
             Spacer()
 
@@ -195,15 +182,15 @@ struct CameraView: View {
 
             // 데모 모드
             Button { showDemoPicker = true } label: {
-                VStack(spacing: 6) {
+                VStack(spacing: 4) {
                     Image(systemName: "list.bullet")
-                        .font(.system(size: 22))
+                        .font(.system(size: 20))
                         .foregroundStyle(.white)
                     Text("데모")
-                        .font(.system(size: 11))
+                        .font(.system(size: 10))
                         .foregroundStyle(.white.opacity(0.8))
                 }
-                .frame(width: 70)
+                .frame(width: 80)
             }
         }
         .padding(.horizontal, 32)

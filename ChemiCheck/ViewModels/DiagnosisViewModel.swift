@@ -118,7 +118,7 @@ final class DiagnosisViewModel {
         await MainActor.run { analysisStep = .calculating }
         try? await Task.sleep(nanoseconds: 400_000_000)
 
-        let product = DummyDataLoader.shared.products.randomElement() ?? DummyDataLoader.shared.products[0]
+        let product = DummyDataLoader.shared.products.randomElement() ?? DummyDataLoader.shared.products.first ?? DummyDataLoader.shared.hardcodedFallbackProduct()
         await MainActor.run {
             loadProduct(product, for: profile)
             analysisStep = .done
@@ -141,7 +141,7 @@ final class DiagnosisViewModel {
     // MARK: - Private
 
     private func fallbackToDummy(for profile: FamilyProfile) {
-        let product = DummyDataLoader.shared.products.randomElement() ?? DummyDataLoader.shared.products[0]
+        let product = DummyDataLoader.shared.products.randomElement() ?? DummyDataLoader.shared.products.first ?? DummyDataLoader.shared.hardcodedFallbackProduct()
         loadProduct(product, for: profile)
     }
 

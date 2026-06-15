@@ -87,10 +87,12 @@ struct HomeView: View {
             CameraView(
                 onCapture: { image in
                     showCamera = false
+                    diagnosisVM.reset()
+                    diagnosisVM.isAnalyzing = true
+                    showDiagnosis = true
                     Task {
                         await diagnosisVM.analyzeImage(image, for: appState.familyProfile)
                         if let p = diagnosisVM.currentProduct { appState.addRecentProduct(p) }
-                        await MainActor.run { showDiagnosis = true }
                     }
                 },
                 onDemoSelect: { product in
@@ -142,7 +144,7 @@ struct HomeView: View {
             Spacer()
             HStack(spacing: 10) {
                 ZStack(alignment: .topTrailing) {
-                    Button {} label: {
+                    Button { appState.selectedTab = 1 } label: {
                         Image(systemName: "bell.fill")
                             .font(.system(size: 17))
                             .foregroundStyle(Color.textPrimary)

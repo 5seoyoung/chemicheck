@@ -16,6 +16,8 @@
 		1A60C3605A7C69739677D956 /* Color+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55411CF2D1464739B55B1179 /* Color+Extension.swift */; };
 		1B70023C05E98337E0EF96B9 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB4C9DE6B4BF2487BD38AFC /* ChatMessage.swift */; };
 		2359CF42BE537544794A2478 /* DummyDataLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2877B3BA8F0980AE3E3F48EE /* DummyDataLoader.swift */; };
+		6065A544E21E487ABDA17B56 /* LocalDBService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1CFB93EFE12C41E0815BF6B4 /* LocalDBService.swift */; };
+		73767F16445D423A9E4FC3C3 /* chemicheck.sqlite in Resources */ = {isa = PBXBuildFile; fileRef = 0CD9C390F67E46AB9DBEA316 /* chemicheck.sqlite */; };
 		296E75FFF66AB5942B33E26A /* alternatives.json in Resources */ = {isa = PBXBuildFile; fileRef = FD0A6AC714D64CC42E20537F /* alternatives.json */; };
 		2AFF3CE81069DD053AF10169 /* NotificationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA194BB530DE665990453F8E /* NotificationDetailView.swift */; };
 		2D6A6CA152662E1994D9ED99 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F372B85495A6E3D17ACEC8AA /* NotificationService.swift */; };
@@ -38,6 +40,7 @@
 		85E7ED66ED144C8008102CBD /* AirKoreaAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1EB85EA70E55588F59193F /* AirKoreaAPIService.swift */; };
 		86265AC843F665093A3C41B2 /* FamilyProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84F21C42955811F4C0A42CB6 /* FamilyProfile.swift */; };
 		8AA330C7705F84C7E31A3415 /* AIAgentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9FCD21BF5BA5312E808FA00 /* AIAgentService.swift */; };
+		A1B2C3D4E5F6A7B8C9D0E1F2 /* LabelImageSaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1E2D3C4B5A6978869504132 /* LabelImageSaver.swift */; };
 		902E82D2468BB9442A043987 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 291DEC959BC5CDDFA78B4AFD /* UserNotifications.framework */; };
 		93D385C4DA037BCA06906559 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB99269169B9AEEB5A9C4122 /* CoreLocation.framework */; };
 		952BBE588A16901E76F71A5B /* Chemical.swift in Sources */ = {isa = PBXBuildFile; fileRef = 279B692FD60DF389EF8B81A1 /* Chemical.swift */; };
@@ -72,6 +75,8 @@
 		2386041123ACDADD5E31EE40 /* RiskBadge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RiskBadge.swift; sourceTree = "<group>"; };
 		279B692FD60DF389EF8B81A1 /* Chemical.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chemical.swift; sourceTree = "<group>"; };
 		2877B3BA8F0980AE3E3F48EE /* DummyDataLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyDataLoader.swift; sourceTree = "<group>"; };
+		1CFB93EFE12C41E0815BF6B4 /* LocalDBService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalDBService.swift; sourceTree = "<group>"; };
+		0CD9C390F67E46AB9DBEA316 /* chemicheck.sqlite */ = {isa = PBXFileReference; lastKnownFileType = file; path = chemicheck.sqlite; sourceTree = "<group>"; };
 		291DEC959BC5CDDFA78B4AFD /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
 		296AB8B3B30EA6703AA16B01 /* Alternative.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alternative.swift; sourceTree = "<group>"; };
 		2EE42E621D885B85F6EBFC02 /* FoodDrugAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodDrugAPIService.swift; sourceTree = "<group>"; };
@@ -96,6 +101,7 @@
 		AAA3E08081FF55F207D947FB /* recalls_curated.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = recalls_curated.json; sourceTree = "<group>"; };
 		B5191F82D1E17E1AA8E0F713 /* chemicals.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = chemicals.json; sourceTree = "<group>"; };
 		B9FCD21BF5BA5312E808FA00 /* AIAgentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AIAgentService.swift; sourceTree = "<group>"; };
+		F1E2D3C4B5A6978869504132 /* LabelImageSaver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabelImageSaver.swift; sourceTree = "<group>"; };
 		BCB4C9DE6B4BF2487BD38AFC /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		C602BFB7D8BF56EF2DE609E4 /* ChatAgentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAgentView.swift; sourceTree = "<group>"; };
 		CA3CBB0E572D0B1139BEB98D /* Vision.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Vision.framework; path = System/Library/Frameworks/Vision.framework; sourceTree = SDKROOT; };
@@ -258,6 +264,7 @@
 				B5191F82D1E17E1AA8E0F713 /* chemicals.json */,
 				424F0733C88A59A5A8C088C9 /* products.json */,
 				AAA3E08081FF55F207D947FB /* recalls_curated.json */,
+				0CD9C390F67E46AB9DBEA316 /* chemicheck.sqlite */,
 			);
 			path = DummyData;
 			sourceTree = "<group>";
@@ -282,6 +289,7 @@
 			isa = PBXGroup;
 			children = (
 				2877B3BA8F0980AE3E3F48EE /* DummyDataLoader.swift */,
+				1CFB93EFE12C41E0815BF6B4 /* LocalDBService.swift */,
 				30C6B244868BBC95BDCC6CCF /* RecallCuratedLoader.swift */,
 				9CE74972FDEBBC091D260F48 /* DummyData */,
 			);
@@ -316,6 +324,7 @@
 				4C1EB85EA70E55588F59193F /* AirKoreaAPIService.swift */,
 				2EE42E621D885B85F6EBFC02 /* FoodDrugAPIService.swift */,
 				DB79BEAE5E2FCB063550E0F4 /* KEITIAPIService.swift */,
+				F1E2D3C4B5A6978869504132 /* LabelImageSaver.swift */,
 				F372B85495A6E3D17ACEC8AA /* NotificationService.swift */,
 				94DF0501D66D34F730963028 /* OCRService.swift */,
 				5D406A61CFE75CD9EF5611A7 /* RiskCalculator.swift */,
@@ -414,6 +423,7 @@
 				3958F5DDC5C2E901BFDBC602 /* chemicals_cache.json in Resources */,
 				310845AF2644F70BD69888AF /* products.json in Resources */,
 				34F1A55737DC0A8E64F58A59 /* recalls_curated.json in Resources */,
+				73767F16445D423A9E4FC3C3 /* chemicheck.sqlite in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +453,8 @@
 				15EAD0C96AF3BE8BB5D48FE7 /* DiagnosisResultView.swift in Sources */,
 				84D8A232DD0E016D99AF5646 /* DiagnosisViewModel.swift in Sources */,
 				2359CF42BE537544794A2478 /* DummyDataLoader.swift in Sources */,
+				6065A544E21E487ABDA17B56 /* LocalDBService.swift in Sources */,
+				A1B2C3D4E5F6A7B8C9D0E1F2 /* LabelImageSaver.swift in Sources */,
 				86265AC843F665093A3C41B2 /* FamilyProfile.swift in Sources */,
 				0D0A80DF6734990EDACC3EEA /* FoodDrugAPIService.swift in Sources */,
 				E2D4AB4B1B5EF6BABDE94552 /* HomeView.swift in Sources */,

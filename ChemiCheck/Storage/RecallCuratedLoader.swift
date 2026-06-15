@@ -41,19 +41,51 @@ final class RecallCuratedLoader {
 
     /// 제품명·브랜드·카테고리 기준으로 회수 목록 매칭
     func findMatch(for product: Product) -> RecallEntry? {
+        // 1차: 공개 데이터 SQLite (생활화학제품 위반정보 5723건)
+        let dbRecalls = LocalDBService.shared.searchRecalls(productName: product.name, limit: 5)
+        if let first = dbRecalls.first {
+            return RecallEntry(
+                recallId: "DB_\(first.id)",
+                productName: first.productName,
+                manufacturer: first.manufacturer,
+                reportNumber: first.reportNumber,
+                violationType: first.actionType.isEmpty ? "생활화학제품 안전기준 위반" : first.actionType,
+                recallDate: first.actionDate,
+                refundContact: "구매처 문의",
+                description: "환경부 생활화학제품 안전관리법에 따른 조치. 출처: \(first.legalBasis)",
+                keywords: product.name.components(separatedBy: " ")
+            )
+        }
+
+        // 2차: 큐레이션 JSON (recalls_curated.json)
         let searchTerms = ([product.name, product.brand, product.category.rawValue]
             + product.chemicals.map { $0.name })
             .map { $0.lowercased() }
 
         return entries.first { entry in
-            // 1차: 제품명 직접 매칭
             if entry.productName.lowercased().contains(product.name.lowercased()) { return true }
             if product.name.lowercased().contains(entry.productName.lowercased()) { return true }
-            // 2차: 키워드 중 2개 이상 일치
             let matchCount = entry.keywords.filter { kw in
                 searchTerms.contains { $0.contains(kw.lowercased()) }
             }.count
             return matchCount >= 2
+        }
+    }
+
+    /// 최신 위반 목록 (홈 화면 알림용)
+    func recentRecallEntries(limit: Int = 10) -> [RecallEntry] {
+        LocalDBService.shared.recentRecalls(limit: limit).map { rec in
+            RecallEntry(
+                recallId: "DB_\(rec.id)",
+                productName: rec.productName,
+                manufacturer: rec.manufacturer,
+                reportNumber: rec.reportNumber,
+                violationType: rec.actionType.isEmpty ? "생활화학제품 안전기준 위반" : rec.actionType,
+                recallDate: rec.actionDate,
+                refundContact: "구매처 문의",
+                description: "환경부 생활화학제품 안전관리법 위반. \(rec.legalBasis)",
+                keywords: rec.productName.components(separatedBy: " ")
+            )
         }
     }
 }

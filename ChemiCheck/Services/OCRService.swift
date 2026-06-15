@@ -36,6 +36,17 @@ final class OCRService {
         let text = normalize(rawText)
         var found: Set<String> = []
 
+        // 0차: LocalDB 7189건 화학물질명 직접 매칭 (한/영 모두)
+        let dbNames = LocalDBService.shared.chemicalNames
+        for entry in dbNames {
+            if !entry.nameKr.isEmpty, text.localizedCaseInsensitiveContains(entry.nameKr) {
+                found.insert(entry.nameKr)
+            } else if !entry.nameEn.isEmpty, entry.nameEn.count >= 4,
+                      text.localizedCaseInsensitiveContains(entry.nameEn) {
+                found.insert(entry.nameKr.isEmpty ? entry.nameEn : entry.nameKr)
+            }
+        }
+
         // 1차: 알려진 화학물질명 직접 매칭 (aliases 포함)
         for entry in chemicalAliasMap {
             for alias in entry.value {

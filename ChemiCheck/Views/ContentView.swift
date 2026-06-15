@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ContentView: View {
     @Environment(AppState.self) private var appState
-    @State private var selectedTab = 0
     @State private var showCamera = false
     @State private var diagnosisVM = DiagnosisViewModel()
     @State private var showDiagnosis = false
@@ -11,16 +10,16 @@ struct ContentView: View {
         ZStack(alignment: .bottom) {
             Color(hex: "#F3FAF5").ignoresSafeArea()
 
-            // 활성 탭만 렌더링
+            // 활성 탭만 렌더링 (각 View가 자체 NavigationStack을 가지므로 중복 래핑 없음)
             Group {
-                if selectedTab == 0 {
-                    HomeView(selectedTab: $selectedTab)
-                } else if selectedTab == 1 {
-                    NavigationStack { MyProductsView() }
-                } else if selectedTab == 2 {
-                    NavigationStack { ChatAgentView() }
+                if appState.selectedTab == 0 {
+                    HomeView()
+                } else if appState.selectedTab == 1 {
+                    MyProductsView()
+                } else if appState.selectedTab == 2 {
+                    ChatAgentView()
                 } else {
-                    NavigationStack { MyPageView() }
+                    MyPageView()
                 }
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -31,12 +30,12 @@ struct ContentView: View {
             CameraView(
                 onCapture: { image in
                     showCamera = false
+                    diagnosisVM.reset()
+                    diagnosisVM.isAnalyzing = true
+                    showDiagnosis = true
                     Task {
                         await diagnosisVM.analyzeImage(image, for: appState.familyProfile)
-                        await MainActor.run {
-                            if let p = diagnosisVM.currentProduct { appState.addRecentProduct(p) }
-                            showDiagnosis = true
-                        }
+                        if let p = diagnosisVM.currentProduct { appState.addRecentProduct(p) }
                     }
                 },
                 onDemoSelect: { product in
@@ -102,15 +101,15 @@ struct ContentView: View {
     @ViewBuilder
     private func tabButton(icon: String, label: String, tag: Int) -> some View {
         Button {
-            withAnimation(.easeInOut(duration: 0.18)) { selectedTab = tag }
+            withAnimation(.easeInOut(duration: 0.18)) { appState.selectedTab = tag }
         } label: {
             VStack(spacing: 4) {
                 Image(systemName: icon)
                     .font(.system(size: 20))
-                    .foregroundStyle(selectedTab == tag ? Color.brandNavy : Color.textTertiary)
+                    .foregroundStyle(appState.selectedTab == tag ? Color.brandNavy : Color.textTertiary)
                 Text(label)
-                    .font(.system(size: 9, weight: selectedTab == tag ? .bold : .regular))
-                    .foregroundStyle(selectedTab == tag ? Color.brandNavy : Color.textTertiary)
+                    .font(.system(size: 9, weight: appState.selectedTab == tag ? .bold : .regular))
+                    .foregroundStyle(appState.selectedTab == tag ? Color.brandNavy : Color.textTertiary)
             }
             .frame(maxWidth: .infinity)
             .contentShape(Rectangle())

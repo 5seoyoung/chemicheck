@@ -86,6 +86,19 @@ final class AppState {
         NotificationService.shared.sendRecallNotification(product: product)
     }
 
+    func resetAll() {
+        let keys = ["hasCompletedOnboarding", "familyProfile", "registeredProducts",
+                    "recentProducts", "demoMode", "labelImagesSavedV1"]
+        keys.forEach { UserDefaults.standard.removeObject(forKey: $0) }
+        hasCompletedOnboarding = false
+        familyProfile = FamilyProfile()
+        registeredProducts = []
+        recentProducts = []
+        pendingRecall = nil
+        notificationBadgeCount = 0
+        selectedTab = 0
+    }
+
     func clearRecallNotification() {
         pendingRecall = nil
         if notificationBadgeCount > 0 { notificationBadgeCount -= 1 }

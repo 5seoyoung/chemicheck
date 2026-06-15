@@ -21,14 +21,22 @@ final class FoodDrugAPIService {
             }
         }
 
-        // 캐시 미스 처리: 현재는 기존 chemicals.json에서 추가 탐색
+        // 캐시 미스 처리: 1) chemicals.json 큐레이션 → 2) LocalDB 7,189건 순으로 조회
         for name in unmatchedNames {
+            // 1차: 큐레이션 chemicals.json
             if let chem = DummyDataLoader.shared.chemicals.first(where: {
                 $0.name.localizedCaseInsensitiveContains(name) ||
                 $0.englishName.localizedCaseInsensitiveContains(name)
             }) {
                 if !results.contains(where: { $0.id == chem.id }) {
                     results.append(chem)
+                }
+                continue
+            }
+            // 2차: LocalDB SQLite 7,189건
+            if let dbChem = DummyDataLoader.shared.chemicalByName(name) {
+                if !results.contains(where: { $0.id == dbChem.id }) {
+                    results.append(dbChem)
                 }
             }
         }

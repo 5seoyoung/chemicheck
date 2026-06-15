@@ -8,41 +8,39 @@ struct ChatAgentView: View {
 
     var body: some View {
         NavigationStack {
-            VStack(spacing: 0) {
-                // Messages
-                ScrollViewReader { proxy in
-                    ScrollView(showsIndicators: false) {
-                        VStack(spacing: 0) {
-                            if chatVM.messages.isEmpty {
-                                welcomeHeader
-                                    .padding(.bottom, 8)
-                            }
-                            LazyVStack(spacing: 12) {
-                                ForEach(chatVM.messages) { message in
-                                    MessageBubble(message: message).id(message.id)
-                                }
-                            }
-                            .padding(.horizontal, 16)
-                            .padding(.bottom, 16)
+            ScrollViewReader { proxy in
+                ScrollView(showsIndicators: false) {
+                    VStack(spacing: 0) {
+                        if chatVM.messages.isEmpty {
+                            welcomeHeader
+                                .padding(.bottom, 8)
                         }
-                        .padding(.top, 8)
+                        LazyVStack(spacing: 12) {
+                            ForEach(chatVM.messages) { message in
+                                MessageBubble(message: message).id(message.id)
+                            }
+                        }
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 16)
                     }
-                    .onChange(of: chatVM.messages.count) {
-                        if let lastId = chatVM.messages.last?.id {
-                            withAnimation { proxy.scrollTo(lastId, anchor: .bottom) }
-                        }
+                    .padding(.top, 8)
+                }
+                .onChange(of: chatVM.messages.count) {
+                    if let lastId = chatVM.messages.last?.id {
+                        withAnimation { proxy.scrollTo(lastId, anchor: .bottom) }
                     }
                 }
-
-                // Quick prompts
-                if chatVM.messages.isEmpty {
-                    quickPromptsBar
+            }
+            .safeAreaInset(edge: .bottom, spacing: 0) {
+                VStack(spacing: 0) {
+                    if chatVM.messages.isEmpty {
+                        quickPromptsBar
+                    }
+                    Divider().opacity(0.4)
+                    inputBar(vm: Bindable(chatVM))
                 }
-
-                Divider().opacity(0.4)
-
-                // Input bar — @Bindable 사용으로 바인딩 보장
-                inputBar(vm: Bindable(chatVM))
+                .padding(.bottom, 100)
+                .background(Color(hex: "#F3FAF5"))
             }
             .background(Color(hex: "#F3FAF5"))
             .navigationTitle(contextProduct.map { "\($0.name) AI 상담" } ?? "AI 안전 상담")

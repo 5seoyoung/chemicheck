@@ -22,6 +22,17 @@ final class DummyDataLoader {
         products.first { $0.id == id }
     }
 
+    /// OCR에서 추출한 화학물질명으로 Chemical 객체 조회 (큐레이션 JSON → SQLite DB 순)
+    func chemicalByName(_ name: String) -> Chemical? {
+        if let match = chemicals.first(where: {
+            $0.name.localizedCaseInsensitiveContains(name) ||
+            $0.englishName.localizedCaseInsensitiveContains(name)
+        }) { return match }
+        if let rec = LocalDBService.shared.searchChemical(nameKr: name) { return rec.toChemical() }
+        if let rec = LocalDBService.shared.searchChemicalByEn(nameEn: name) { return rec.toChemical() }
+        return nil
+    }
+
     // MARK: - Private
 
     private func loadChemicals() -> [Chemical] {
@@ -125,6 +136,18 @@ final class DummyDataLoader {
             recallReason: dict["recallReason"] as? String,
             imageSystemName: dict["imageSystemName"] as? String ?? "shippingbox.fill",
             scanDate: nil
+        )
+    }
+
+    func hardcodedFallbackProduct() -> Product {
+        Product(
+            id: "fallback_001", name: "스캔된 제품", brand: "라벨 스캔",
+            category: .multipurpose, riskLevel: .medium,
+            chemicals: hardcodedChemicals().prefix(1).map { $0 },
+            usageGuide: "사용 후 환기하세요.", ventilationMinutes: 15,
+            certifications: [], alternativeIds: [],
+            isRegistered: false, isRecalled: false, recallReason: nil,
+            imageSystemName: "shippingbox.fill", scanDate: Date()
         )
     }
 
